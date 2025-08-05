@@ -2,14 +2,14 @@ import Bentolio from "@/components/ui/bentolio";
 
 export default function Home() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#f9fcff" }}>
+    <div className="h-screen w-screen overflow-auto" style={{ backgroundColor: "#f9fcff" }}>
       <Bentolio
         bg="#e3f2f9"
         secondary="#aecfdc"
         secondaryTextColor="#1d1d1f"
         name={{
-          first: "ALEX",
-          last: "PORTFOLIO",
+          first: "SAIYED",
+          last: "MADNI",
         }}
         title="Full Stack Developer Creating Amazing Web Experiences"
         curvedText="Creating"
@@ -40,7 +40,7 @@ export default function Home() {
           },
         ]}
         contactLink="mailto:alex@example.com"
-        navLinks={["PROJECTS", "ABOUT", "CONTACT"]}
+        navLinks={["HOME", "PROJECTS", "ABOUT", "CONTACT"]}
       />
     </div>
   );
