@@ -1,12 +1,19 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, Calendar, ExternalLink, Github } from "lucide-react";
+import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import { portfolioConfig } from "@/config/portfolio";
 
 // Projects will be loaded from configuration
 const projects = portfolioConfig.projects;
 
-function ProjectCard({ project, index }: { project: any; index: number }) {
+interface Project {
+  name: string;
+  description?: string;
+  image?: string;
+  link?: string;
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { threshold: 0.1, once: false });
   const [isExpanded, setIsExpanded] = useState(false);
