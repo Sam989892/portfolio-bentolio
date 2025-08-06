@@ -5,7 +5,10 @@
       "Bash(cp:*)",
       "Bash(timeout:*)",
       "Bash(npm run lint)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(git commit:*)",
+      "Bash(npm run build:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }

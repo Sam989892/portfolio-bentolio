@@ -77,172 +77,154 @@ export interface PortfolioConfig {
 
 // 🔧 UPDATE THE INFORMATION BELOW WITH YOUR DETAILS
 export const portfolioConfig: PortfolioConfig = {
-  // 👤 Personal Information
   personal: {
-    firstName: "MADNI", // e.g., "JULIA"
-    lastName: "SAIYED",   // e.g., "HUANG" 
-    fullName: "Madni Saiyed",   // e.g., "Julia Huang"
-    title: "Your Professional Title", // e.g., "Artist Redefining Architecture with AI-Driven Design"
-    curvedText: "KeyWord",        // Word to be highlighted in title, e.g., "Architecture"
-    description: "Your professional description here...", // Brief bio for about sections
-    location: "Vadodara, India", // e.g., "Los Angeles, CA"
-    profileImage: "/portrait.jpeg", // Make sure your portrait is in public folder
+    firstName: "MADNI",
+    lastName: "SAIYED",
+    fullName: "Saiyed Madni",
+    title: "Frontend Developer Merging UI Elegance with AI/ML Brilliance",
+    curvedText: "AI, ML, Vibe Coder",
+    description:
+      "Full-stack developer focused on frontend excellence using React.js and modern JavaScript, with an AI/ML edge. Passionate about building intelligent, beautiful, and impactful web interfaces.",
+    location: "Vadodara, Gujarat, India",
+    profileImage: "/portrait.jpeg",
   },
 
-  // 📧 Contact Information
   contact: {
-    email: "your.email@example.com",
-    phone: "+1 (555) 123-4567", // Optional
-    website: "https://yourwebsite.com", // Optional
-    location: "Your City, Country",
+    email: "smdmadni@gmail.com",
+    phone: "9898929374",
+    website: "https://profound-licorice-ede22c.netlify.app/",
+    location: "Vadodara, Gujarat, India",
   },
 
-  // 🌐 Social Media Links
   social: [
     {
-      name: "Instagram",
-      url: "https://instagram.com/yourusername",
-      handle: "@yourusername", // Optional
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/madni14saiyed/",
+      handle: "/in/madni14saiyed",
     },
     {
-      name: "LinkedIn", 
-      url: "https://linkedin.com/in/yourprofile",
-      handle: "/in/yourprofile", // Optional
+      name: "GitHub",
+      url: "https://github.com/sam989892",
     },
-    {
-      name: "Twitter",
-      url: "https://twitter.com/yourusername", 
-      handle: "@yourusername", // Optional
-    },
-    // Add more social links as needed
   ],
 
-  // 🚀 Projects Portfolio
   projects: [
     {
       id: 1,
-      name: "Project ",
-      subtitle: "Brief project subtitle",
-      description: "Detailed description of your first project. Explain the problem you solved, the approach you took, and the impact of your work.",
-      image: "/portrait.jpeg", // Replace with actual project image
-      link: "https://yourproject1.com", // Optional
+      name: "Award-Winning School Website",
+      subtitle: "Best UI Design | Competition Winner",
+      description:
+        "Developed a responsive school website with modern design and accessibility standards. Won 1st place among 100+ entries for best design and UX.",
+      image: "/portrait.jpeg",
+      link: "https://gorgeous-shortbread-467224.netlify.app/",
       date: "2024",
-      category: "Your Category", // e.g., "Web Development", "Design", "Architecture"
-      tags: ["Tag1", "Tag2", "Tag3"], // Relevant technologies or skills
+      category: "Web Development",
+      tags: ["HTML", "CSS", "JavaScript"],
       status: "Completed",
     },
     {
-      id: 2, 
-      name: "Project Two",
-      subtitle: "Another project subtitle",
-      description: "Description of your second project...",
-      image: "/portrait.jpeg", // Replace with actual project image
-      link: "#", // Optional
+      id: 2,
+      name: "E-Commerce Platform",
+      subtitle: "Full-Stack MERN Application",
+      description:
+        "Built an end-to-end e-commerce app with product catalog, cart, and checkout functionality using React and Node.js RESTful APIs.",
+      image: "/portrait.jpeg",
+      link: "https://clinquant-bienenstitch-5e4ca2.netlify.app/",
       date: "2024",
-      category: "Your Category",
-      tags: ["Tag1", "Tag2", "Tag3"],
-      status: "In Development",
+      category: "Full Stack Development",
+      tags: ["React", "Node.js", "MongoDB", "REST API"],
+      status: "Completed",
     },
     {
       id: 3,
-      name: "Project Three", 
-      subtitle: "Third project subtitle",
-      description: "Description of your third project...",
-      // No image for this project
-      link: "#", // Optional
+      name: "Algorithm Visualizer",
+      subtitle: "DSA-Based Visualization Tool",
+      description:
+        "Created a JavaScript-based visualizer to demonstrate sorting algorithms like Quick Sort, Merge Sort, Heap Sort with real-time animation and performance analysis.",
+      image: "/portrait.jpeg",
+      link: "https://delicate-tapioca-2de161.netlify.app/",
       date: "2023",
-      category: "Your Category", 
-      tags: ["Tag1", "Tag2"],
+      category: "Data Structures & Algorithms",
+      tags: ["JavaScript", "Algorithms", "Visualization"],
       status: "Completed",
     },
-    {
-      id: 4,
-      name: "Project Four",
-      subtitle: "Fourth project subtitle", 
-      description: "Description of your fourth project...",
-      date: "2023",
-      category: "Your Category",
-      tags: ["Tag1", "Tag2", "Tag3"],
-      status: "Exhibited",
-    },
   ],
 
-  // 💼 Skills & Expertise
   skills: {
     technical: [
-      "Skill 1", // e.g., "React", "Next.js", "AI/ML"
-      "Skill 2", // e.g., "Python", "Architecture Design"
-      "Skill 3", // e.g., "3D Modeling", "Data Analysis"
-      "Skill 4",
-      "Skill 5",
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "React.js",
+      "Redux",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "SQL",
+      "Python",
+      "Pandas",
+      "Neural Networks",
     ],
-    tools: [
-      "Tool 1", // e.g., "Figma", "Adobe Creative Suite"
-      "Tool 2", // e.g., "VS Code", "AutoCAD"
-      "Tool 3", // e.g., "Blender", "TensorFlow"
-    ],
-    languages: [
-      "English", 
-      "Language 2", // Add your languages
-      "Language 3",
-    ],
+    tools: ["Git", "Visual Studio Code", "Figma"],
+    languages: ["English", "Hindi", "Gujarati"],
   },
 
-  // 💼 Work Experience  
   experience: [
     {
-      title: "Your Current/Recent Position",
-      company: "Company Name",
-      duration: "Start Date - End Date", // e.g., "2022 - Present"
-      description: "Brief description of your role and responsibilities...",
+      title: "Frontend Developer & Team Lead",
+      company: "Consultancy Centre, Parul University",
+      duration: "Dec 2024 – Apr 2025",
+      description:
+        "Led a 6-member frontend team for client projects. Integrated APIs and implemented OOPs design in JavaScript for highly maintainable and scalable code.",
       achievements: [
-        "Key achievement 1",
-        "Key achievement 2", 
-        "Key achievement 3",
+        "Achieved 99.9% app uptime with optimized frontend-backend integration",
+        "Improved codebase maintainability by 40% using JS OOPs patterns",
+        "Mentored junior developers and conducted code reviews",
       ],
     },
     {
-      title: "Previous Position",
-      company: "Previous Company",
-      duration: "Start Date - End Date",
-      description: "Description of your previous role...",
+      title: "Machine Learning Intern",
+      company: "Prodigy Infotech (Remote)",
+      duration: "May 2024 – June 2024",
+      description:
+        "Developed machine learning models using Python and Pandas with 85%+ accuracy for classification tasks.",
       achievements: [
-        "Achievement 1",
-        "Achievement 2",
+        "Optimized ML models with algorithmic improvements",
+        "Gained hands-on experience with data preprocessing and analysis",
       ],
     },
   ],
 
-  // 🎯 About Page Content
   about: {
-    intro: "Welcome to My Creative Universe", // Section title
-    philosophy: "Your philosophy or approach to work. Explain what drives you and your unique perspective...",
-    approach: "Step into a world where traditional boundaries dissolve, giving way to innovative solutions that challenge perception and redefine experiences.",
+    intro: "Welcome to My Digital Universe",
+    philosophy:
+      "I believe in designing systems and products that not only function well but feel intuitive and enjoyable to use. Merging aesthetics with logic is where true magic happens.",
+    approach:
+      "I combine structured problem-solving with a user-first mindset. My workflow is grounded in clean architecture, AI/ML possibilities, and collaborative iteration.",
     specialties: [
       {
-        icon: "🎨", // You can use emojis or replace with icon names
-        title: "Creative Vision",
-        description: "Innovative approach to problem-solving",
+        icon: "🎨",
+        title: "Creative Interfaces",
+        description: "Designing visually appealing and intuitive UIs",
       },
       {
         icon: "🤖",
-        title: "Technology Integration", 
-        description: "Cutting-edge technical solutions",
+        title: "AI/ML Integration",
+        description: "Building intelligent features into web systems",
       },
       {
-        icon: "🏗️",
-        title: "System Design",
-        description: "Scalable and efficient architecture",
+        icon: "🧠",
+        title: "Problem Solving",
+        description: "Structured solutions using DSA and system design",
       },
       {
-        icon: "🌟", 
-        title: "Innovation",
-        description: "Future-focused solutions",
+        icon: "⚙️",
+        title: "Full-Stack Flow",
+        description: "From frontend delight to backend reliability",
       },
     ],
   },
 
-  // 🧭 Navigation Menu
   navigation: ["HOME", "PROJECTS", "ABOUT", "CONTACT"],
 };
 

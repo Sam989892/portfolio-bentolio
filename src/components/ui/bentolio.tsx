@@ -34,6 +34,16 @@ interface BentolioProps {
     url: string;
   }[];
   navLinks?: string[];
+  about?: {
+    intro: string;
+    philosophy: string;
+    approach: string;
+    specialties: Array<{
+      icon: string;
+      title: string;
+      description: string;
+    }>;
+  };
 }
 
 // Using XL layout as the final optimized layout
@@ -90,6 +100,7 @@ export default function Bentolio({
   socialLinks,
   contactLink = "#",
   navLinks,
+  about,
 }: BentolioProps) {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState<string>('HOME');
@@ -108,10 +119,9 @@ export default function Bentolio({
       y: -2,
       opacity: 0.8,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
-        damping: 17,
-        duration: 0.15
+        damping: 17
       }
     }
   };
@@ -175,21 +185,19 @@ export default function Bentolio({
           title: "Building Digital Solutions That Matter",
           curvedText: "Digital",
           description: "Explore my portfolio of web applications, mobile apps, and digital experiences. Each project represents a unique challenge solved with modern technologies and user-centered design principles.",
-          projects: [
-            { name: "E-Commerce Platform", link: "#", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop" },
-            { name: "Task Manager Pro", link: "#" },
-            { name: "Chat Application", link: "#" },
-            { name: "AI Content Generator", link: "#" },
-          ],
+          projects: projects,
           contactText: "View All Projects",
           contactSubtext: "See complete portfolio"
         };
       case 'ABOUT':
         return {
-          title: "Full Stack Developer with Passion for Innovation",
+          title: about?.intro || "Full Stack Developer with Passion for Innovation",
           curvedText: "Innovation",
-          description: "I'm a passionate full-stack developer with 3+ years of experience creating innovative web applications. I specialize in React, Next.js, and Node.js, focusing on user-centered design and clean, maintainable code.",
-          projects: [
+          description: about?.philosophy || "I'm a passionate full-stack developer with 3+ years of experience creating innovative web applications. I specialize in React, Next.js, and Node.js, focusing on user-centered design and clean, maintainable code.",
+          projects: about?.specialties?.map(specialty => ({
+            name: specialty.title,
+            link: "#"
+          })) || [
             { name: "Skills & Expertise", link: "#" },
             { name: "Experience", link: "#" },
             { name: "Education", link: "#" },
@@ -241,12 +249,12 @@ export default function Bentolio({
               className="mb-2 sm:mb-0 font-light text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl hover:opacity-70 transition-opacity duration-200 cursor-pointer" 
               style={{ color: "#1d1d1f" }}
             >
-              <i>{name.first}</i>{" "}
-              <span className="font-medium">{name.last}</span>
+              <i>{name?.first}</i>{" "}
+              <span className="font-medium">{name?.last}</span>
             </button>
             {/* Desktop Navigation */}
             <nav className="hidden sm:flex items-center gap-3 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
-              {navLinks.map((link) => (
+              {navLinks?.map((link) => (
                 <motion.button
                   key={link}
                   variants={navHoverVariants}
@@ -344,7 +352,7 @@ export default function Bentolio({
                   }}
                 >
                   <div className="p-2">
-                    {navLinks.map((link, index) => (
+                    {navLinks?.map((link, index) => (
                       <motion.button
                         key={link}
                         variants={mobileItemVariants}
