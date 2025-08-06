@@ -5,7 +5,7 @@ import { portfolioConfig } from "@/config/portfolio";
 
 function FlowerIcon({ animate = false }) {
   return (
-    <motion.div 
+    <motion.div
       className="w-16 h-16 sm:w-20 sm:h-20"
       animate={animate ? { rotate: [0, 360] } : {}}
       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -34,7 +34,7 @@ function HeroSection() {
   const y = useTransform(scrollY, [0, 300], [0, -50]);
 
   return (
-    <motion.section 
+    <motion.section
       style={{ y }}
       className="bg-gradient-to-br from-[#e3f2f9] to-[#aecfdc]/30 rounded-[30px] p-8 mx-4 mt-20 mb-6 relative overflow-hidden min-h-[400px] flex items-center"
     >
@@ -44,7 +44,7 @@ function HeroSection() {
         transition={{ duration: 0.8, delay: 0.3 }}
         className="max-w-sm z-10"
       >
-        <motion.h1 
+        <motion.h1
           className="font-bold text-[#1d1d1f] text-[36px] sm:text-[44px] leading-tight mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,9 +55,13 @@ function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
           >
-            {portfolioConfig.personal.title.split(portfolioConfig.personal.curvedText)[0]}
+            {
+              portfolioConfig.personal.title.split(
+                portfolioConfig.personal.curvedText
+              )[0]
+            }
           </motion.span>
-          <motion.span 
+          <motion.span
             className="font-light italic text-[#3B82F6]"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -70,10 +74,14 @@ function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1 }}
           >
-            {portfolioConfig.personal.title.split(portfolioConfig.personal.curvedText)[1]}
+            {
+              portfolioConfig.personal.title.split(
+                portfolioConfig.personal.curvedText
+              )[1]
+            }
           </motion.span>
         </motion.h1>
-        
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -83,8 +91,8 @@ function HeroSection() {
           {portfolioConfig.personal.description}
         </motion.p>
       </motion.div>
-      
-      <motion.div 
+
+      <motion.div
         initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
         transition={{ duration: 1, delay: 0.8, type: "spring" }}
@@ -104,17 +112,17 @@ function HeroSection() {
 
 function PortraitSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   return (
-    <motion.section 
+    <motion.section
       ref={ref}
       className="mx-4 mt-6 mb-6 relative"
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.div 
+      <motion.div
         className="h-[350px] sm:h-[450px] overflow-hidden rounded-[25px] relative"
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.3 }}
@@ -128,7 +136,7 @@ function PortraitSection() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/20 to-transparent" />
       </motion.div>
-      
+
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
@@ -145,7 +153,7 @@ function PortraitSection() {
 
 function IntroSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   return (
     <motion.section
@@ -155,16 +163,16 @@ function IntroSection() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h2 
+      <motion.h2
         className="font-medium text-[#1d1d1f] text-[28px] mb-6"
         initial={{ opacity: 0, x: -30 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
-{portfolioConfig.about.intro}
+        {portfolioConfig.about.intro}
       </motion.h2>
-      
-      <motion.p 
+
+      <motion.p
         className="font-light text-[#1d1d1f] text-[18px] leading-7 mb-6"
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
@@ -173,14 +181,14 @@ function IntroSection() {
         {portfolioConfig.about.approach}
       </motion.p>
 
-      <motion.div 
+      <motion.div
         className="grid grid-cols-2 gap-6"
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.6 }}
       >
         {portfolioConfig.about.specialties.map((item, index) => (
-          <motion.div 
+          <motion.div
             key={item.title}
             className="text-center p-4"
             initial={{ scale: 0.8 }}

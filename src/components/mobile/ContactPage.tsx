@@ -6,7 +6,7 @@ import { portfolioConfig } from "@/config/portfolio";
 
 function ContactHeader() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   return (
     <motion.section
@@ -16,7 +16,7 @@ function ContactHeader() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.div 
+      <motion.div
         className="flex items-center justify-between mb-8"
         initial={{ opacity: 0, x: -30 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
@@ -28,7 +28,7 @@ function ContactHeader() {
             <p>Let&apos;s create something amazing</p>
           </div>
         </div>
-        <motion.div 
+        <motion.div
           className="w-12 h-12 flex items-center justify-center rounded-full bg-[#000000]/10"
           animate={{ rotate: [0, 10, -10, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
@@ -43,8 +43,8 @@ function ContactHeader() {
           </svg>
         </motion.div>
       </motion.div>
-      
-      <motion.h1 
+
+      <motion.h1
         className="font-medium text-[#000000] text-[40px] sm:text-[52px] mb-6"
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
@@ -53,14 +53,15 @@ function ContactHeader() {
         Contact Me
       </motion.h1>
 
-      <motion.p 
+      <motion.p
         className="font-light text-[#000000] text-[18px] leading-7 max-w-md"
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
-        Whether you&apos;re interested in collaboration, have questions about my work, or 
-        want to discuss a potential project, I&apos;d love to hear from you.
+        Whether you&apos;re interested in collaboration, have questions about my
+        work, or want to discuss a potential project, I&apos;d love to hear from
+        you.
       </motion.p>
 
       <motion.div
@@ -74,19 +75,21 @@ function ContactHeader() {
 
 function ContactForm() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
-    message: ""
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -109,7 +112,7 @@ function ContactForm() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h2 
+      <motion.h2
         className="font-medium text-[#000000] text-[28px] mb-8"
         initial={{ opacity: 0, x: -30 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
@@ -117,8 +120,8 @@ function ContactForm() {
       >
         Send Me a Message
       </motion.h2>
-      
-      <motion.form 
+
+      <motion.form
         onSubmit={handleSubmit}
         className="space-y-6"
         initial={{ opacity: 0, y: 30 }}
@@ -144,7 +147,7 @@ function ContactForm() {
               placeholder="Your full name"
             />
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
@@ -242,27 +245,31 @@ function ContactForm() {
 
 function ContactInfo() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   const contactMethods = [
     {
       icon: Mail,
       title: "Email",
       value: portfolioConfig.contact.email,
-      description: "For general inquiries and collaborations"
+      description: "For general inquiries and collaborations",
     },
-    ...(portfolioConfig.contact.phone ? [{
-      icon: Phone,
-      title: "Phone",
-      value: portfolioConfig.contact.phone,
-      description: "Available for professional discussions"
-    }] : []),
+    ...(portfolioConfig.contact.phone
+      ? [
+          {
+            icon: Phone,
+            title: "Phone",
+            value: portfolioConfig.contact.phone,
+            description: "Available for professional discussions",
+          },
+        ]
+      : []),
     {
       icon: MapPin,
       title: "Location",
       value: portfolioConfig.contact.location,
-      description: "Available for meetings and consultations"
-    }
+      description: "Available for meetings and consultations",
+    },
   ];
 
   return (
@@ -273,7 +280,7 @@ function ContactInfo() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h2 
+      <motion.h2
         className="font-medium text-[#000000] text-[28px] mb-8"
         initial={{ opacity: 0, x: -30 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
@@ -281,12 +288,12 @@ function ContactInfo() {
       >
         Other Ways to Reach Me
       </motion.h2>
-      
+
       <div className="space-y-6">
         {contactMethods.map((method, index) => {
           const Icon = method.icon;
           return (
-            <motion.div 
+            <motion.div
               key={method.title}
               className="flex items-start gap-4 p-4 bg-[#aecfdc]/10 rounded-[20px]"
               initial={{ opacity: 0, y: 20 }}
@@ -318,22 +325,22 @@ function ContactInfo() {
 
 function SocialsSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
-  const socials = portfolioConfig.social.map(social => ({
+  const inView = useInView(ref, { amount: 0.1, once: false });
+  const socials = portfolioConfig.social.map((social) => ({
     name: social.name,
     handle: social.url,
-    url: social.url
+    url: social.url,
   }));
 
   return (
-    <motion.section 
+    <motion.section
       ref={ref}
       className="bg-[#e3f2f9] rounded-[30px] p-8 mx-4 mb-12"
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h2 
+      <motion.h2
         className="font-medium text-[#000000] text-[28px] mb-6 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
@@ -341,7 +348,7 @@ function SocialsSection() {
       >
         Follow My Journey
       </motion.h2>
-      
+
       <div className="space-y-4">
         {socials.map((social, index) => (
           <motion.a
@@ -353,7 +360,10 @@ function SocialsSection() {
             initial={{ opacity: 0, x: -20 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
             transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
-            whileHover={{ scale: 1.02, backgroundColor: "rgba(174, 207, 220, 0.2)" }}
+            whileHover={{
+              scale: 1.02,
+              backgroundColor: "rgba(174, 207, 220, 0.2)",
+            }}
             whileTap={{ scale: 0.98 }}
           >
             <div>

@@ -15,11 +15,11 @@ interface Project {
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <motion.div 
+    <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
@@ -40,8 +40,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.description || "Web Application"}
           </p>
         </div>
-        
-        <motion.button 
+
+        <motion.button
           className="w-12 h-12 flex items-center justify-center rounded-full bg-[#aecfdc]/30"
           whileHover={{ scale: 1.1, backgroundColor: "#aecfdc" }}
           whileTap={{ scale: 0.9 }}
@@ -57,7 +57,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </div>
 
       {project.image && (
-        <motion.div 
+        <motion.div
           className="h-[240px] overflow-hidden rounded-[20px] mb-6 relative"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={inView ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
@@ -73,12 +73,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       )}
 
       <p className="font-light text-[#000000] text-[16px] leading-6 mb-6">
-        {project.description || "Modern web application built with cutting-edge technologies."}
+        {project.description ||
+          "Modern web application built with cutting-edge technologies."}
       </p>
 
       <div className="flex flex-wrap gap-2 mb-6">
         {["React", "Next.js", "TypeScript"].map((tag) => (
-          <span 
+          <span
             key={tag}
             className="px-3 py-1 bg-[#aecfdc]/20 rounded-full text-[12px] font-medium text-[#1d1d1f]"
           >
@@ -89,28 +90,28 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
       <motion.div
         initial={{ height: 0, opacity: 0 }}
-        animate={{ 
-          height: isExpanded ? "auto" : 0, 
-          opacity: isExpanded ? 1 : 0 
+        animate={{
+          height: isExpanded ? "auto" : 0,
+          opacity: isExpanded ? 1 : 0,
         }}
         transition={{ duration: 0.3 }}
         className="overflow-hidden border-t border-[#aecfdc]/30 pt-6"
       >
         <div className="grid grid-cols-2 gap-4">
-          <motion.button 
+          <motion.button
             className="flex items-center justify-center gap-2 bg-[#000000] text-white px-6 py-3 rounded-full font-medium text-[14px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => project.link && window.open(project.link, '_blank')}
+            onClick={() => project.link && window.open(project.link, "_blank")}
           >
             <ExternalLink size={16} />
             View Details
           </motion.button>
-          <motion.button 
+          <motion.button
             className="flex items-center justify-center gap-2 border border-[#000000] text-[#000000] px-6 py-3 rounded-full font-medium text-[14px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => project.link && window.open(project.link, '_blank')}
+            onClick={() => project.link && window.open(project.link, "_blank")}
           >
             <Github size={16} />
             Source
@@ -129,7 +130,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 function ProjectsHeader() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   return (
     <motion.section
@@ -139,7 +140,7 @@ function ProjectsHeader() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h1 
+      <motion.h1
         className="font-medium text-[#000000] text-[40px] sm:text-[48px] mb-4"
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
@@ -147,8 +148,8 @@ function ProjectsHeader() {
       >
         Projects
       </motion.h1>
-      
-      <motion.p 
+
+      <motion.p
         className="font-light text-[#000000] text-[18px] leading-7 max-w-md"
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}

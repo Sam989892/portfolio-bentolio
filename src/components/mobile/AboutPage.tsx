@@ -6,7 +6,7 @@ import { portfolioConfig } from "@/config/portfolio";
 
 function CircleIcon({ animate = false }) {
   return (
-    <motion.div 
+    <motion.div
       className="w-12 h-12"
       animate={animate ? { scale: [1, 1.2, 1] } : {}}
       transition={{ duration: 2, repeat: Infinity }}
@@ -27,7 +27,7 @@ function CircleIcon({ animate = false }) {
 
 function AboutHeader() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   return (
     <motion.section
@@ -37,7 +37,7 @@ function AboutHeader() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.div 
+      <motion.div
         className="flex items-start gap-4 mb-6"
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ function AboutHeader() {
 
 function BioSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   return (
     <motion.section
@@ -75,7 +75,7 @@ function BioSection() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h2 
+      <motion.h2
         className="font-medium text-[#000000] text-[28px] mb-6"
         initial={{ opacity: 0, x: -30 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
@@ -83,8 +83,8 @@ function BioSection() {
       >
         My Story
       </motion.h2>
-      
-      <motion.div 
+
+      <motion.div
         className="space-y-6"
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
@@ -93,11 +93,11 @@ function BioSection() {
         <p className="font-light text-[#000000] text-[18px] leading-7">
           {portfolioConfig.about.philosophy}
         </p>
-        
+
         <p className="font-light text-[#000000] text-[18px] leading-7">
           {portfolioConfig.about.approach}
         </p>
-        
+
         <p className="font-light text-[#000000] text-[18px] leading-7">
           {portfolioConfig.personal.description}
         </p>
@@ -114,13 +114,25 @@ function BioSection() {
 
 function StatsSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   const stats = [
-    { number: portfolioConfig.projects.length.toString(), label: "Projects Completed", desc: "Innovative solutions delivered" },
-    { number: "3+", label: "Years Experience", desc: "Professional background" },
+    {
+      number: portfolioConfig.projects.length.toString(),
+      label: "Projects Completed",
+      desc: "Innovative solutions delivered",
+    },
+    {
+      number: "3+",
+      label: "Years Experience",
+      desc: "Professional background",
+    },
     { number: "10+", label: "Core Skills", desc: "Technical expertise areas" },
-    { number: portfolioConfig.social.length.toString(), label: "Social Platforms", desc: "Ways to connect" }
+    {
+      number: portfolioConfig.social.length.toString(),
+      label: "Social Platforms",
+      desc: "Ways to connect",
+    },
   ];
 
   return (
@@ -131,7 +143,7 @@ function StatsSection() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h2 
+      <motion.h2
         className="font-medium text-[#000000] text-[28px] mb-8 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
@@ -139,14 +151,16 @@ function StatsSection() {
       >
         By the Numbers
       </motion.h2>
-      
+
       <div className="grid grid-cols-2 gap-6">
         {stats.map((stat, index) => (
-          <motion.div 
+          <motion.div
             key={stat.label}
             className="text-center p-4"
             initial={{ scale: 0.8, opacity: 0 }}
-            animate={inView ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1 }}
+            animate={
+              inView ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1 }
+            }
             transition={{ delay: 0.4 + index * 0.1, type: "spring" }}
           >
             <div className="font-bold text-[#000000] text-[36px] mb-2">
@@ -167,12 +181,18 @@ function StatsSection() {
 
 function SkillsSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   const skills = [
-    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
-    { category: "Backend", items: ["Node.js", "Python", "PostgreSQL", "MongoDB"] },
-    { category: "Tools", items: ["Git", "Docker", "AWS", "Figma"] }
+    {
+      category: "Frontend",
+      items: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    },
+    {
+      category: "Backend",
+      items: ["Node.js", "Python", "PostgreSQL", "MongoDB"],
+    },
+    { category: "Tools", items: ["Git", "Docker", "AWS", "Figma"] },
   ];
 
   return (
@@ -183,7 +203,7 @@ function SkillsSection() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h2 
+      <motion.h2
         className="font-medium text-[#000000] text-[28px] mb-8"
         initial={{ opacity: 0, x: -30 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
@@ -191,10 +211,10 @@ function SkillsSection() {
       >
         Skills & Expertise
       </motion.h2>
-      
+
       <div className="space-y-6">
         {skills.map((skillGroup, index) => (
-          <motion.div 
+          <motion.div
             key={skillGroup.category}
             className="border-b border-[#aecfdc]/30 pb-6 last:border-b-0"
             initial={{ opacity: 0, y: 20 }}
@@ -206,11 +226,13 @@ function SkillsSection() {
             </h3>
             <div className="flex flex-wrap gap-2">
               {skillGroup.items.map((skill, skillIndex) => (
-                <motion.span 
+                <motion.span
                   key={skill}
                   className="px-3 py-2 bg-[#aecfdc]/20 rounded-full text-[14px] font-light text-[#1d1d1f]"
                   initial={{ scale: 0.8, opacity: 0 }}
-                  animate={inView ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1 }}
+                  animate={
+                    inView ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1 }
+                  }
                   transition={{ delay: 0.5 + skillIndex * 0.05, duration: 0.3 }}
                 >
                   {skill}
@@ -226,12 +248,18 @@ function SkillsSection() {
 
 function ContactInfo() {
   const ref = useRef(null);
-  const inView = useInView(ref, { threshold: 0.1, once: false });
+  const inView = useInView(ref, { amount: 0.1, once: false });
 
   const contactItems = [
-    { icon: MapPin, label: "Location", value: portfolioConfig.contact.location },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: portfolioConfig.contact.location,
+    },
     { icon: Mail, label: "Email", value: portfolioConfig.contact.email },
-    ...(portfolioConfig.contact.phone ? [{ icon: Phone, label: "Phone", value: portfolioConfig.contact.phone }] : [])
+    ...(portfolioConfig.contact.phone
+      ? [{ icon: Phone, label: "Phone", value: portfolioConfig.contact.phone }]
+      : []),
   ];
 
   return (
@@ -242,7 +270,7 @@ function ContactInfo() {
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <motion.h2 
+      <motion.h2
         className="font-medium text-[#000000] text-[28px] mb-6"
         initial={{ opacity: 0, x: -30 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
@@ -250,12 +278,12 @@ function ContactInfo() {
       >
         Get in Touch
       </motion.h2>
-      
+
       <div className="space-y-4">
         {contactItems.map((item, index) => {
           const Icon = item.icon;
           return (
-            <motion.div 
+            <motion.div
               key={item.label}
               className="flex items-center gap-4"
               initial={{ opacity: 0, x: -20 }}
