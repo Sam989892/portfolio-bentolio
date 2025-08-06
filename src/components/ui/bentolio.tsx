@@ -66,12 +66,6 @@ const config = {
   imageHeights: "min-h-[400px] sm:min-h-[500px] md:min-h-[550px]"
 };
 
-const springAnimation = {
-  type: "spring" as const,
-  stiffness: 300,
-  damping: 30,
-  duration: 0.6,
-};
 
 const flipAnimation = {
   type: "spring" as const,
@@ -133,8 +127,7 @@ export default function Bentolio({
       scale: 0.95,
       y: -10,
       transition: { 
-        duration: 0.2,
-        ease: "easeInOut"
+        duration: 0.2
       },
     },
     open: {
@@ -144,8 +137,7 @@ export default function Bentolio({
       transition: { 
         duration: 0.3, 
         staggerChildren: 0.08,
-        delayChildren: 0.1,
-        ease: "easeOut"
+        delayChildren: 0.1
       },
     },
   };
@@ -161,7 +153,7 @@ export default function Bentolio({
       x: 0,
       scale: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 300,
         damping: 24
       }
@@ -302,7 +294,6 @@ export default function Bentolio({
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ 
                       duration: 0.2,
-                      ease: "easeInOut"
                     }}
                   >
                     <X size={26} color="#1d1d1f" strokeWidth={2.5} />
@@ -315,7 +306,6 @@ export default function Bentolio({
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ 
                       duration: 0.2,
-                      ease: "easeInOut"
                     }}
                   >
                     <Menu size={26} color="#1d1d1f" strokeWidth={2.5} />
@@ -352,7 +342,7 @@ export default function Bentolio({
                   }}
                 >
                   <div className="p-2">
-                    {navLinks?.map((link, index) => (
+                    {navLinks?.map((link) => (
                       <motion.button
                         key={link}
                         variants={mobileItemVariants}
@@ -423,7 +413,7 @@ export default function Bentolio({
                   <div className="flex justify-end w-full">
                     <motion.div
                       animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                      transition={{ duration: 20, repeat: Infinity }}
                       className="m-0 w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 2xl:w-32"
                     >
                       <Image
@@ -440,7 +430,7 @@ export default function Bentolio({
                     className={`m-0 w-full sm:w-[90%] font-bold ${config.mainTitleText}`} 
                     style={{ color: "#1d1d1f" }}
                   >
-                    {pageContent.title.split(pageContent.curvedText).map((part, i) => (
+                    {pageContent.title?.split(pageContent.curvedText || '').map((part, i) => (
                       <React.Fragment key={`title-part-${currentPage}-${i}`}>
                         {i === 0 ? (
                           part
@@ -582,7 +572,7 @@ export default function Bentolio({
                   }}
                   className={`flex-1 ${config.componentPadding} ${config.borderRadius} h-full`}
                 >
-                  {pageContent.projects.map((project, index) => (
+                  {pageContent.projects?.map((project, index) => (
                     <div key={`${currentPage}-project-${index}`}>
                       {index === 0 ? (
                         <React.Fragment>
@@ -608,7 +598,7 @@ export default function Bentolio({
                           </Link>
                           {/* Consistent visual container for all sections - EXACT same dimensions */}
                           <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden`}>
-                            {(currentPage === 'HOME' || currentPage === 'PROJECTS') && project.image && (
+                            {(currentPage === 'HOME' || currentPage === 'PROJECTS') && 'image' in project && project.image && (
                               <Image
                                 src={project.image}
                                 alt={project.name}
