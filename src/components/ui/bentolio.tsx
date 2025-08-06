@@ -81,40 +81,15 @@ export default function Bentolio({
   bg = "#e3f2f9",
   secondary = "#aecfdc",
   secondaryTextColor = "#1d1d1f",
-  name = {
-    first: "JULIA",
-    last: "HUANG",
-  },
-  title = "Artist Redefining Architecture with AI-Driven Design",
-  curvedText = "Architecture",
-  description = "Julia Huang is an innovative AI artist, renowned for blending cutting-edge technology with creative expression. Based in LA, she crafts unique digital art experiences accessible globally.",
-  projects = [
-    {
-      name: "Musea",
-      image: "https://atomix-ui.vercel.app/bentolio/images/bentolio.png",
-      link: "#",
-    },
-    { name: "Elara", link: "#" },
-    { name: "Verve", link: "#" },
-    { name: "Zephyr", link: "#" },
-  ],
-  profileImage = "/bentolio/images/bentolio.png",
-  socialLinks = [
-    {
-      name: "Instagram",
-      url: "#",
-    },
-    {
-      name: "Twitter",
-      url: "#",
-    },
-    {
-      name: "LinkedIn",
-      url: "#",
-    },
-  ],
+  name,
+  title,
+  curvedText,
+  description,
+  projects,
+  profileImage = "/portrait.jpeg",
+  socialLinks,
   contactLink = "#",
-  navLinks = ["HOME", "PROJECTS", "ABOUT", "CONTACT"],
+  navLinks,
 }: BentolioProps) {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState<string>('HOME');
@@ -228,12 +203,10 @@ export default function Bentolio({
           title: "Let's Create Something Amazing Together",
           curvedText: "Amazing",
           description: "Ready to bring your ideas to life? I'm available for freelance projects, collaborations, and full-time opportunities. Let's discuss how we can work together to create exceptional digital experiences.",
-          projects: [
-            { name: "Email Me", link: "mailto:alex@example.com" },
-            { name: "Schedule Call", link: "#" },
-            { name: "View LinkedIn", link: "https://linkedin.com" },
-            { name: "Check GitHub", link: "https://github.com" },
-          ],
+          projects: socialLinks?.slice(0, 4).map(social => ({
+            name: social.name,
+            link: social.url
+          })) || [],
           contactText: "Send Message",
           contactSubtext: "Start a conversation"
         };
@@ -440,13 +413,20 @@ export default function Bentolio({
                   className={`flex flex-col justify-between ${config.componentPadding} ${config.borderRadius} h-full`}
                 >
                   <div className="flex justify-end w-full">
-                    <Image
-                      src="https://atomix-ui.vercel.app/bentolio/svg/flower.svg"
-                      alt="flower"
-                      width={80}
-                      height={80}
+                    <motion.div
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                       className="m-0 w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 2xl:w-32"
-                    />
+                    >
+                      <Image
+                        src="https://atomix-ui.vercel.app/bentolio/svg/flower.svg"
+                        alt="flower"
+                        width={80}
+                        height={80}
+                        className="w-full h-full"
+                        style={{ filter: 'hue-rotate(200deg)' }}
+                      />
+                    </motion.div>
                   </div>
                   <p 
                     className={`m-0 w-full sm:w-[90%] font-bold ${config.mainTitleText}`} 
@@ -510,6 +490,7 @@ export default function Bentolio({
                     width={32}
                     height={32}
                     className={config.iconSizes}
+                    style={{ filter: 'hue-rotate(200deg)' }}
                   />
                   <p className={`m-0 w-full sm:w-[90%] font-light ${config.descriptionText}`}>
                     {pageContent.description}
@@ -533,7 +514,7 @@ export default function Bentolio({
             {/* Contact Section with 3D Flip */}
             <div className="sm:col-span-1 lg:col-span-3 cursor-pointer" style={{ perspective: "1000px" }}>
               <Link
-                href={currentPage === 'CONTACT' ? "mailto:alex@example.com" : contactLink}
+                href={currentPage === 'CONTACT' ? contactLink : contactLink}
                 style={{ textDecoration: "none" }}
                 className="block h-full"
               >
@@ -564,6 +545,7 @@ export default function Bentolio({
                         width={32}
                         height={32}
                         className={config.iconSizes}
+                        style={{ filter: 'hue-rotate(200deg)' }}
                       />
                     </div>
                     <p className={`m-0 font-medium ${config.contactText}`}>
@@ -613,6 +595,7 @@ export default function Bentolio({
                               width={24}
                               height={24}
                               className={config.iconSizes}
+                              style={{ filter: 'hue-rotate(200deg)' }}
                             />
                           </Link>
                           {/* Consistent visual container for all sections - EXACT same dimensions */}
@@ -648,7 +631,7 @@ export default function Bentolio({
                         <div
                           onClick={() => router.push(project.link || "#")}
                           className="py-3 sm:py-4 md:py-6 lg:py-8 border-t-[2px] cursor-pointer hover:bg-white/20 transition-colors"
-                          style={{ borderTopColor: "#c4deea" }}
+                          style={{ borderTopColor: "#aecfdc" }}
                         >
                           <p className={`m-0 font-medium ${config.projectText}`}>
                             {project.name}

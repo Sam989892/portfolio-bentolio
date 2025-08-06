@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(cp:*)",
+      "Bash(timeout:*)",
+      "Bash(npm run lint)",
+      "Bash(taskkill:*)"
     ],
     "deny": []
   }
