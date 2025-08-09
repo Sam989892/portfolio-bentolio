@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger } from "./dialog";
 
 interface Project {
   name: string;
@@ -103,6 +104,7 @@ export default function Bentolio({
   const [currentPage, setCurrentPage] = useState<string>('HOME');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [selectedProjectImage, setSelectedProjectImage] = useState<string | null>(null);
 
   // Navigation hover animation variants
   const navHoverVariants = {
@@ -636,15 +638,89 @@ export default function Bentolio({
                             </div>
                           )}
                           {/* Consistent visual container for all sections - EXACT same dimensions */}
-                          <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden`}>
+                          <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden relative group`}>
                             {(currentPage === 'HOME' || currentPage === 'PROJECTS') && 'image' in project && project.image && (
-                              <Image
-                                src={project.image}
-                                alt={project.name}
-                                width={330}
-                                height={330}
-                                className={`w-full h-full object-cover ${config.borderRadius}`}
-                              />
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <motion.div
+                                    className="w-full h-full cursor-pointer relative"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    transition={{ duration: 0.3, ease: "easeOut" }}
+                                  >
+                                    <Image
+                                      src={project.image}
+                                      alt={project.name}
+                                      width={330}
+                                      height={330}
+                                      className={`w-full h-full object-cover ${config.borderRadius} transition-all duration-300 group-hover:brightness-110`}
+                                    />
+                                    {/* Hover overlay */}
+                                    <motion.div
+                                      className={`absolute inset-0 bg-black/20 ${config.borderRadius} flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                                      initial={{ opacity: 0 }}
+                                      whileHover={{ opacity: 1 }}
+                                    >
+                                      <motion.div
+                                        className="bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg"
+                                        initial={{ scale: 0.8, opacity: 0 }}
+                                        whileHover={{ scale: 1, opacity: 1 }}
+                                        transition={{ duration: 0.2 }}
+                                      >
+                                        <svg
+                                          width="24"
+                                          height="24"
+                                          viewBox="0 0 24 24"
+                                          fill="none"
+                                          stroke="currentColor"
+                                          strokeWidth="2"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          className="text-gray-700"
+                                        >
+                                          <path d="M15 3h6v6" />
+                                          <path d="M10 14 21 3" />
+                                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                        </svg>
+                                      </motion.div>
+                                    </motion.div>
+                                  </motion.div>
+                                </DialogTrigger>
+                                <DialogContent className="max-w-4xl w-[90vw] h-[90vh] p-0 overflow-hidden">
+                                  <div className="relative w-full h-full flex items-center justify-center bg-black/5">
+                                    <Image
+                                      src={project.image}
+                                      alt={project.name}
+                                      width={800}
+                                      height={600}
+                                      className="max-w-full max-h-full object-contain rounded-lg"
+                                      priority
+                                    />
+                                    {/* Project info overlay */}
+                                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+                                      <h3 className="text-2xl font-bold mb-2">{project.name}</h3>
+                                      {project.subtitle && (
+                                        <p className="text-lg opacity-90 mb-2">{project.subtitle}</p>
+                                      )}
+                                      {project.description && (
+                                        <p className="text-sm opacity-80 mb-3">{project.description}</p>
+                                      )}
+                                      {project.tags && project.tags.length > 0 && (
+                                        <div className="flex flex-wrap gap-2">
+                                          {project.tags.map((tag, tagIndex) => (
+                                            <span
+                                              key={tagIndex}
+                                              className="px-2 py-1 text-xs bg-white/20 backdrop-blur-sm rounded-md"
+                                            >
+                                              {tag}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
                             )}
                             {currentPage === 'ABOUT' && (
                               <div className={`w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center ${config.borderRadius}`}>
