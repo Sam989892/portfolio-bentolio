@@ -11,6 +11,9 @@ interface Project {
   name: string;
   image?: string;
   link?: string;
+  subtitle?: string;
+  description?: string;
+  tags?: string[];
 }
 
 interface NameProps {
@@ -596,6 +599,42 @@ export default function Bentolio({
                               style={{ filter: 'hue-rotate(200deg)' }}
                             />
                           </Link>
+                          {/* Enhanced project details for PROJECTS page */}
+                          {currentPage === 'PROJECTS' && project.subtitle && (
+                            <p 
+                              className="m-0 font-light text-lg sm:text-xl mt-2 mb-3" 
+                              style={{ color: secondaryTextColor }}
+                            >
+                              {project.subtitle}
+                            </p>
+                          )}
+                          {currentPage === 'PROJECTS' && project.description && (
+                            <p 
+                              className="m-0 font-light text-sm sm:text-base leading-relaxed mb-4" 
+                              style={{ color: secondaryTextColor, opacity: 0.8 }}
+                            >
+                              {project.description.length > 120 
+                                ? `${project.description.substring(0, 120)}...` 
+                                : project.description}
+                            </p>
+                          )}
+                          {currentPage === 'PROJECTS' && project.tags && project.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {project.tags.slice(0, 4).map((tag, tagIndex) => (
+                                <span
+                                  key={tagIndex}
+                                  className="px-2 py-1 text-xs font-medium rounded-md"
+                                  style={{ 
+                                    backgroundColor: secondary + '40',
+                                    color: secondaryTextColor,
+                                    opacity: 0.9
+                                  }}
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                           {/* Consistent visual container for all sections - EXACT same dimensions */}
                           <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden`}>
                             {(currentPage === 'HOME' || currentPage === 'PROJECTS') && 'image' in project && project.image && (
@@ -634,6 +673,15 @@ export default function Bentolio({
                           <p className={`m-0 font-medium ${config.projectText}`}>
                             {project.name}
                           </p>
+                          {/* Enhanced subtitle for subsequent projects on PROJECTS page */}
+                          {currentPage === 'PROJECTS' && project.subtitle && (
+                            <p 
+                              className="m-0 font-light text-sm sm:text-base mt-1" 
+                              style={{ color: secondaryTextColor, opacity: 0.7 }}
+                            >
+                              {project.subtitle}
+                            </p>
+                          )}
                         </div>
                       )}
                     </div>

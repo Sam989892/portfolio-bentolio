@@ -54,6 +54,9 @@ export default function ResponsivePortfolio() {
               name: project.name,
               image: project.image,
               link: project.link,
+              subtitle: project.subtitle,
+              description: project.description,
+              tags: project.tags,
             }))}
             profileImage={portfolioConfig.personal.profileImage}
             socialLinks={portfolioConfig.social}
