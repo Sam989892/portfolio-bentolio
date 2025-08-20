@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
 import svgPaths from "./svg-iu8vadswdw";
 import { portfolioConfig } from "@/config/portfolio";
+import SharedNavigation from "./SharedNavigation";
 
 function CircleIcon({ animate = false }) {
   return (
@@ -185,14 +186,21 @@ function SkillsSection() {
 
   const skills = [
     {
-      category: "Frontend",
-      items: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+      category: "Technical",
+      items: portfolioConfig.skills.technical,
     },
     {
-      category: "Backend",
-      items: ["Node.js", "Python", "PostgreSQL", "MongoDB"],
+      category: "DSA",
+      items: portfolioConfig.skills.dsa,
     },
-    { category: "Tools", items: ["Git", "Docker", "AWS", "Figma"] },
+    {
+      category: "AI/ML",
+      items: portfolioConfig.skills.aiml,
+    },
+    { 
+      category: "Tools", 
+      items: portfolioConfig.skills.tools 
+    },
   ];
 
   return (
@@ -309,7 +317,7 @@ function ContactInfo() {
   );
 }
 
-export default function AboutPage() {
+export default function AboutPage({ onNavigate }: { onNavigate?: (page: string) => void }) {
   return (
     <div className="pb-12">
       <AboutHeader />
@@ -317,6 +325,7 @@ export default function AboutPage() {
       <StatsSection />
       <SkillsSection />
       <ContactInfo />
+      {onNavigate && <SharedNavigation currentPage="about" onNavigate={onNavigate} />}
     </div>
   );
 }

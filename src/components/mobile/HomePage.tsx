@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import svgPaths from "./svg-iu8vadswdw";
 import { portfolioConfig } from "@/config/portfolio";
+import SharedNavigation from "./SharedNavigation";
 
 function FlowerIcon({ animate = false }) {
   return (
@@ -207,12 +208,14 @@ function IntroSection() {
   );
 }
 
-export default function HomePage() {
+
+export default function HomePage({ onNavigate }: { onNavigate?: (page: string) => void }) {
   return (
     <div>
       <HeroSection />
       <PortraitSection />
       <IntroSection />
+      {onNavigate && <SharedNavigation currentPage="home" onNavigate={onNavigate} />}
     </div>
   );
 }

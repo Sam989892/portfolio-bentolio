@@ -1,20 +1,29 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { portfolioConfig } from "@/config/portfolio";
+import SharedNavigation from "./SharedNavigation";
 
 // Projects will be loaded from configuration
 const projects = portfolioConfig.projects;
 
 interface Project {
+  id: number;
   name: string;
-  description?: string;
+  subtitle: string;
+  description: string;
   image?: string;
   link?: string;
+  date: string;
+  category: string;
+  tags: string[];
+  status: 'Completed' | 'In Development' | 'Planning' | 'Exhibited';
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef(null);
+  const router = useRouter();
   const inView = useInView(ref, { amount: 0.1, once: false });
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -32,12 +41,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <h3 className="font-medium text-[#000000] text-[28px]">
               {project.name}
             </h3>
-            <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-[12px] font-medium">
-              Active
+            <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-[12px] font-medium">
+              {project.status}
             </span>
           </div>
           <p className="font-light italic text-[#000000]/70 text-[18px] mb-3">
-            {project.description || "Web Application"}
+            {project.subtitle}
           </p>
         </div>
 
@@ -73,12 +82,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       )}
 
       <p className="font-light text-[#000000] text-[16px] leading-6 mb-6">
-        {project.description ||
-          "Modern web application built with cutting-edge technologies."}
+        {project.description}
       </p>
 
       <div className="flex flex-wrap gap-2 mb-6">
-        {["React", "Next.js", "TypeScript"].map((tag) => (
+        {project.tags.map((tag) => (
           <span
             key={tag}
             className="px-3 py-1 bg-[#aecfdc]/20 rounded-full text-[12px] font-medium text-[#1d1d1f]"
@@ -102,9 +110,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             className="flex items-center justify-center gap-2 bg-[#000000] text-white px-6 py-3 rounded-full font-medium text-[14px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => project.link && window.open(project.link, "_blank")}
+            onClick={() => router.push(`/projects/${project.id}`)}
           >
-            <ExternalLink size={16} />
+            <ArrowRight size={16} />
             View Details
           </motion.button>
           <motion.button
@@ -113,8 +121,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             whileTap={{ scale: 0.95 }}
             onClick={() => project.link && window.open(project.link, "_blank")}
           >
-            <Github size={16} />
-            Source
+            <ExternalLink size={16} />
+            Live Demo
           </motion.button>
         </div>
       </motion.div>
@@ -167,7 +175,7 @@ function ProjectsHeader() {
   );
 }
 
-export default function ProjectsPage() {
+export default function ProjectsPage({ onNavigate }: { onNavigate?: (page: string) => void }) {
   return (
     <div className="pb-12">
       <ProjectsHeader />
@@ -176,6 +184,7 @@ export default function ProjectsPage() {
           <ProjectCard key={project.name} project={project} index={index} />
         ))}
       </div>
+      {onNavigate && <SharedNavigation currentPage="projects" onNavigate={onNavigate} />}
     </div>
   );
 }

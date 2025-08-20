@@ -9,7 +9,18 @@
       "Bash(git commit:*)",
       "Bash(npm run build:*)",
       "Bash(rm:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npx next:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npx tsc:*)",
+      "Bash(move:*)",
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(git checkout:*)",
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash(powershell:*)",
+      "Bash(curl:*)"
     ],
     "deny": []
   }

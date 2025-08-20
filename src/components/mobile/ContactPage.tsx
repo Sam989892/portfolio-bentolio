@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight, Mail, Phone, MapPin, Send } from "lucide-react";
 import svgPaths from "./svg-iu8vadswdw";
 import { portfolioConfig } from "@/config/portfolio";
+import SharedNavigation from "./SharedNavigation";
 
 function ContactHeader() {
   const ref = useRef(null);
@@ -328,7 +329,7 @@ function SocialsSection() {
   const inView = useInView(ref, { amount: 0.1, once: false });
   const socials = portfolioConfig.social.map((social) => ({
     name: social.name,
-    handle: social.url,
+    handle: social.handle || social.url,
     url: social.url,
   }));
 
@@ -382,13 +383,14 @@ function SocialsSection() {
   );
 }
 
-export default function ContactPage() {
+export default function ContactPage({ onNavigate }: { onNavigate?: (page: string) => void }) {
   return (
     <div className="pb-12">
       <ContactHeader />
       <ContactForm />
       <ContactInfo />
       <SocialsSection />
+      {onNavigate && <SharedNavigation currentPage="contact" onNavigate={onNavigate} />}
     </div>
   );
 }

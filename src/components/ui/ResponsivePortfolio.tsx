@@ -51,6 +51,7 @@ export default function ResponsivePortfolio() {
             curvedText={portfolioConfig.personal.curvedText}
             description={portfolioConfig.personal.description}
             projects={portfolioConfig.projects.map(project => ({
+              id: project.id,
               name: project.name,
               image: project.image,
               link: project.link,

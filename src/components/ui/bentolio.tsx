@@ -5,9 +5,10 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Send, Download } from "lucide-react";
 
 interface Project {
+  id?: number;
   name: string;
   image?: string;
   link?: string;
@@ -100,6 +101,15 @@ export default function Bentolio({
   const [currentPage, setCurrentPage] = useState<string>('HOME');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  
 
   // Navigation hover animation variants
   const navHoverVariants = {
@@ -169,6 +179,47 @@ export default function Bentolio({
     setIsMobileMenuOpen(false);
   };
 
+  // Handle form submission
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactForm),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setContactForm({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Handle form input changes
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setContactForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Check if we're on desktop (lg and above)
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
+  
+
   // Get page-specific content
   const getPageContent = () => {
     switch (currentPage) {
@@ -195,8 +246,8 @@ export default function Bentolio({
             { name: "Education", link: "#" },
             { name: "Certifications", link: "#" },
           ],
-          contactText: "View Resume",
-          contactSubtext: "Download my latest resume"
+          contactText: "Download Resume",
+          contactSubtext: "Get my latest resume"
         };
       case 'CONTACT':
         return {
@@ -225,8 +276,7 @@ export default function Bentolio({
   const pageContent = getPageContent();
 
   return (
-    <>
-      <div className={config.containerClass} style={{ color: "#1d1d1f" }}>
+      <div className={`${config.containerClass}`} style={{ color: "#1d1d1f" }}>
         {/* Static Header - No animations on page change */}
         <header className={config.headerClass}>
           <motion.div
@@ -406,15 +456,18 @@ export default function Bentolio({
                   style={{ 
                     backgroundColor: bg,
                     transformStyle: "preserve-3d",
-                    backfaceVisibility: "hidden"
+                    backfaceVisibility: "hidden",
                   }}
                   className={`flex flex-col justify-between ${config.componentPadding} ${config.borderRadius} h-full`}
                 >
                   <div className="flex justify-end w-full">
                     <motion.div
                       animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 20, repeat: Infinity }}
+                      transition={{ rotate: { duration: 20, repeat: Infinity } }}
                       className="m-0 w-12 sm:w-16 md:w-20 lg:w-24 xl:w-28 2xl:w-32"
+                      style={{
+                        transformStyle: "preserve-3d"
+                      }}
                     >
                       <Image
                         src="https://atomix-ui.vercel.app/bentolio/svg/flower.svg"
@@ -478,7 +531,7 @@ export default function Bentolio({
                   style={{ 
                     backgroundColor: bg,
                     transformStyle: "preserve-3d",
-                    backfaceVisibility: "hidden"
+                    backfaceVisibility: "hidden",
                   }}
                   className={`flex flex-col justify-between items-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 ${config.componentPadding} ${config.borderRadius} h-full`}
                 >
@@ -510,52 +563,98 @@ export default function Bentolio({
             </div>
 
             {/* Contact Section with 3D Flip */}
-            <div className="sm:col-span-1 lg:col-span-3 cursor-pointer" style={{ perspective: "1000px" }}>
-              <Link
-                href={currentPage === 'CONTACT' ? contactLink : contactLink}
-                style={{ textDecoration: "none" }}
-                className="block h-full"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={`contact-section-${currentPage}`}
-                    initial={isInitialLoad ? { scale: 0.8, opacity: 0 } : { rotateY: -90 }}
-                    animate={{ scale: 1, opacity: 1, rotateY: 0 }}
-                    exit={isInitialLoad ? {} : { rotateY: 90 }}
-                    transition={isInitialLoad ? { ...staticAnimation, delay: 0.5 } : { ...flipAnimation, delay: 0.2 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    style={{ 
-                      backgroundColor: secondary, 
-                      color: secondaryTextColor,
-                      transformStyle: "preserve-3d",
-                      backfaceVisibility: "hidden"
-                    }}
-                    className={`flex flex-col justify-between items-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 ${config.componentPadding} ${config.borderRadius} h-full`}
-                  >
-                    <div className="flex justify-between items-center w-full">
-                      <p className={`w-16 sm:w-20 md:w-24 lg:w-28 font-light ${config.descriptionText} leading-tight`}>
-                        {pageContent.contactSubtext}
-                      </p>
-                      <Image
-                        src="https://atomix-ui.vercel.app/bentolio/svg/arrow.svg"
-                        alt="arrow"
-                        width={32}
-                        height={32}
-                        className={config.iconSizes}
-                        style={{ filter: 'hue-rotate(200deg)' }}
-                      />
+            <div className="sm:col-span-1 lg:col-span-3" style={{ perspective: "1000px" }}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`contact-section-${currentPage}`}
+                  initial={isInitialLoad ? { scale: 0.8, opacity: 0 } : { rotateY: -90 }}
+                  animate={{ scale: 1, opacity: 1, rotateY: 0 }}
+                  exit={isInitialLoad ? {} : { rotateY: 90 }}
+                  transition={isInitialLoad ? { ...staticAnimation, delay: 0.5 } : { ...flipAnimation, delay: 0.2 }}
+                  style={{ 
+                    backgroundColor: secondary, 
+                    color: secondaryTextColor,
+                    transformStyle: "preserve-3d",
+                    backfaceVisibility: "hidden",
+                  }}
+                  className={`flex flex-col justify-between ${config.componentPadding} ${config.borderRadius} h-full`}
+                >
+                  {currentPage === 'CONTACT' ? (
+                    // Show contact info/stats instead of form when on CONTACT page
+                    <div className="flex flex-col justify-between items-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 h-full">
+                      <div className="flex justify-between items-center w-full">
+                        <p className={`w-16 sm:w-20 md:w-24 lg:w-28 font-light ${config.descriptionText} leading-tight`}>
+                          Get in touch
+                        </p>
+                        <Send size={24} className={config.iconSizes} />
+                      </div>
+                      <div className="flex-1 flex flex-col justify-center">
+                        <p className={`m-0 font-medium ${config.contactText} mb-2`}>
+                          Let&apos;s Connect
+                        </p>
+                        <p className={`text-sm opacity-80`}>
+                          Use the form to send me a message
+                        </p>
+                      </div>
                     </div>
-                    <p className={`m-0 font-medium ${config.contactText}`}>
-                      {pageContent.contactText}
-                    </p>
-                  </motion.div>
-                </AnimatePresence>
-              </Link>
+                  ) : currentPage === 'ABOUT' ? (
+                    // Resume Download for ABOUT page
+                    <a
+                      href="/Madni_Saiyed_.pdf"
+                      download="Madni_Saiyed_Resume.pdf"
+                      className="flex flex-col justify-between items-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 h-full hover:scale-[1.02] transition-transform cursor-pointer"
+                    >
+                      <div className="flex justify-between items-center w-full">
+                        <p className={`w-16 sm:w-20 md:w-24 lg:w-28 font-light ${config.descriptionText} leading-tight`}>
+                          {pageContent.contactSubtext}
+                        </p>
+                        <Download size={24} className={config.iconSizes} />
+                      </div>
+                      <p className={`m-0 font-medium ${config.contactText}`}>
+                        {pageContent.contactText}
+                      </p>
+                    </a>
+                  ) : currentPage === 'PROJECTS' ? (
+                    // Projects Page Link
+                    <Link
+                      href="/projects"
+                      style={{ textDecoration: "none" }}
+                      className="flex flex-col justify-between items-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 h-full hover:scale-[1.02] transition-transform cursor-pointer"
+                    >
+                      <div className="flex justify-between items-center w-full">
+                        <p className={`w-16 sm:w-20 md:w-24 lg:w-28 font-light ${config.descriptionText} leading-tight`}>
+                          {pageContent.contactSubtext}
+                        </p>
+                        <ArrowRight size={24} className={config.iconSizes} />
+                      </div>
+                      <p className={`m-0 font-medium ${config.contactText}`}>
+                        {pageContent.contactText}
+                      </p>
+                    </Link>
+                  ) : (
+                    // Regular Contact Link for other pages
+                    <Link
+                      href={contactLink}
+                      style={{ textDecoration: "none" }}
+                      className="flex flex-col justify-between items-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 h-full hover:scale-[1.02] transition-transform cursor-pointer"
+                    >
+                      <div className="flex justify-between items-center w-full">
+                        <p className={`w-16 sm:w-20 md:w-24 lg:w-28 font-light ${config.descriptionText} leading-tight`}>
+                          {pageContent.contactSubtext}
+                        </p>
+                        <ArrowRight size={24} className={config.iconSizes} />
+                      </div>
+                      <p className={`m-0 font-medium ${config.contactText}`}>
+                        {pageContent.contactText}
+                      </p>
+                    </Link>
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 
-          {/* Projects Section with 3D Flip */}
+          {/* Projects Section / Contact Form (Large) with 3D Flip */}
           <div className={`flex flex-col ${config.mainGridGap.split('grid')[0]}lg:col-span-3 h-full`} style={{ perspective: "1000px" }}>
             <div className="flex-1">
               <AnimatePresence mode="wait">
@@ -566,78 +665,185 @@ export default function Bentolio({
                   exit={isInitialLoad ? {} : { rotateY: 90 }}
                   transition={isInitialLoad ? { ...staticAnimation, delay: 0.6 } : { ...flipAnimation, delay: 0.3 }}
                   style={{ 
-                    backgroundColor: bg,
+                    backgroundColor: currentPage === 'CONTACT' ? secondary : bg,
+                    color: currentPage === 'CONTACT' ? secondaryTextColor : "#1d1d1f",
                     transformStyle: "preserve-3d",
-                    backfaceVisibility: "hidden"
+                    backfaceVisibility: "hidden",
                   }}
                   className={`flex-1 ${config.componentPadding} ${config.borderRadius} h-full`}
                 >
-                  {pageContent.projects?.map((project, index) => (
-                    <div key={`${currentPage}-project-${index}`}>
-                      {index === 0 ? (
-                        <React.Fragment>
-                          <Link
-                            href={project.link || "#"}
-                            style={{
-                              textDecoration: "none",
-                              color: "#1d1d1f"
-                            }}
-                            className="flex justify-between items-center w-full hover:opacity-80 transition-opacity"
-                          >
-                            <p className={`m-0 font-medium ${config.projectText}`}>
-                              {project.name}
-                            </p>
-                            <Image
-                              src="https://atomix-ui.vercel.app/bentolio/svg/arrow.svg"
-                              alt="arrow"
-                              width={24}
-                              height={24}
-                              className={config.iconSizes}
-                              style={{ filter: 'hue-rotate(200deg)' }}
-                            />
-                          </Link>
-                          {/* Consistent visual container for all sections - EXACT same dimensions */}
-                          <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden`}>
-                            {(currentPage === 'HOME' || currentPage === 'PROJECTS') && 'image' in project && project.image && (
-                              <Image
-                                src={project.image}
-                                alt={project.name}
-                                width={330}
-                                height={330}
-                                className={`w-full h-full object-cover ${config.borderRadius}`}
-                              />
-                            )}
-                            {currentPage === 'ABOUT' && (
-                              <div className={`w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center ${config.borderRadius}`}>
-                                <div className="text-center">
-                                  <p className="text-2xl font-bold text-gray-700 mb-2">3+</p>
-                                  <p className="text-sm text-gray-600">Years Experience</p>
-                                </div>
-                              </div>
-                            )}
-                            {currentPage === 'CONTACT' && (
-                              <div className={`w-full h-full bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center ${config.borderRadius}`}>
-                                <div className="text-center">
-                                  <p className="text-lg font-bold text-gray-700 mb-2">Available</p>
-                                  <p className="text-sm text-gray-600">For New Projects</p>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        </React.Fragment>
-                      ) : (
-                        <div
-                          onClick={() => router.push(project.link || "#")}
-                          className="py-3 sm:py-4 md:py-6 lg:py-8 border-t-[2px] cursor-pointer hover:bg-white/20 transition-colors"
-                          style={{ borderTopColor: "#aecfdc" }}
-                        >
-                          <p className={`m-0 font-medium ${config.projectText}`}>
-                            {project.name}
-                          </p>
+                  {currentPage === 'CONTACT' ? (
+                    // Large Contact Form for CONTACT page only
+                    <form onSubmit={handleFormSubmit} className="flex flex-col h-full gap-6">
+                      <div className="flex justify-between items-center w-full">
+                        <h2 className={`font-medium ${config.projectText}`}>
+                          Send Message
+                        </h2>
+                        <Send size={32} className={config.iconSizes} />
+                      </div>
+                      
+                      <div className="flex-1 flex flex-col gap-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <input
+                            type="text"
+                            name="name"
+                            placeholder="Your Name"
+                            value={contactForm.name}
+                            onChange={handleFormChange}
+                            required
+                            className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-base placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                          />
+                          
+                          <input
+                            type="email"
+                            name="email"
+                            placeholder="Your Email"
+                            value={contactForm.email}
+                            onChange={handleFormChange}
+                            required
+                            className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-base placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                          />
                         </div>
-                      )}
-                    </div>
-                  ))}
+                        
+                        <input
+                          type="text"
+                          name="subject"
+                          placeholder="Subject"
+                          value={contactForm.subject}
+                          onChange={handleFormChange}
+                          required
+                          className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-base placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                        />
+                        
+                        <textarea
+                          name="message"
+                          placeholder="Your Message"
+                          value={contactForm.message}
+                          onChange={handleFormChange}
+                          required
+                          rows={6}
+                          className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-base placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none flex-1 transition-all"
+                        />
+                      </div>
+                      
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className={`w-full py-4 bg-white/30 hover:bg-white/40 disabled:opacity-50 rounded-2xl font-medium transition-all ${config.descriptionText} flex items-center justify-center gap-3`}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send size={20} />
+                            Send Message
+                          </>
+                        )}
+                      </button>
+
+                      {/* Status Messages */}
+                      <AnimatePresence>
+                        {submitStatus === 'success' && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="p-4 bg-green-100/80 text-green-800 rounded-2xl backdrop-blur-sm"
+                          >
+                            ✅ Message sent successfully! I'll get back to you soon.
+                          </motion.div>
+                        )}
+                        
+                        {submitStatus === 'error' && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="p-4 bg-red-100/80 text-red-800 rounded-2xl backdrop-blur-sm"
+                          >
+                            ❌ Failed to send message. Please try again.
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </form>
+                  ) : (
+                    // Regular Projects Section for all other pages
+                    <>
+                      {pageContent.projects?.map((project, index) => (
+                        <div key={`${currentPage}-project-${index}`}>
+                          {index === 0 ? (
+                            <React.Fragment>
+                              <div
+                                onClick={() => {
+                                  if ('id' in project && project.id) {
+                                    router.push(`/projects/${project.id}`);
+                                  } else if (project.link && project.link !== "#") {
+                                    window.open(project.link, "_blank");
+                                  }
+                                }}
+                                style={{
+                                  color: "#1d1d1f",
+                                  cursor: "pointer"
+                                }}
+                                className="flex justify-between items-center w-full hover:opacity-80 transition-opacity"
+                              >
+                                <p className={`m-0 font-medium ${config.projectText}`}>
+                                  {project.name}
+                                </p>
+                                <Image
+                                  src="https://atomix-ui.vercel.app/bentolio/svg/arrow.svg"
+                                  alt="arrow"
+                                  width={24}
+                                  height={24}
+                                  className={config.iconSizes}
+                                  style={{ filter: 'hue-rotate(200deg)' }}
+                                />
+                              </div>
+                              {/* Consistent visual container for all sections - EXACT same dimensions */}
+                              <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden`}>
+                                {(currentPage === 'HOME' || currentPage === 'PROJECTS') && 'image' in project && project.image && (
+                                  <Image
+                                    src={project.image}
+                                    alt={project.name}
+                                    width={330}
+                                    height={330}
+                                    className={`w-full h-full object-cover ${config.borderRadius}`}
+                                  />
+                                )}
+                                {currentPage === 'ABOUT' && (
+                                  <div className={`w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center ${config.borderRadius}`}>
+                                    <div className="text-center">
+                                      <p className="text-2xl font-bold text-gray-700 mb-2">3+</p>
+                                      <p className="text-sm text-gray-600">Years Experience</p>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </React.Fragment>
+                          ) : (
+                            <div
+                              onClick={() => {
+                                if ('id' in project && project.id) {
+                                  router.push(`/projects/${project.id}`);
+                                } else if (project.link && project.link !== "#") {
+                                  window.open(project.link, "_blank");
+                                }
+                              }}
+                              className="py-3 sm:py-4 md:py-6 lg:py-8 border-t-[2px] cursor-pointer hover:bg-white/20 transition-colors"
+                              style={{ borderTopColor: "#aecfdc" }}
+                            >
+                              <p className={`m-0 font-medium ${config.projectText}`}>
+                                {project.name}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -651,7 +857,7 @@ export default function Bentolio({
                   style={{ 
                     backgroundColor: bg,
                     transformStyle: "preserve-3d",
-                    backfaceVisibility: "hidden"
+                    backfaceVisibility: "hidden",
                   }}
                   initial={isInitialLoad ? { scale: 0.8, opacity: 0 } : { rotateY: -90 }}
                   animate={{ scale: 1, opacity: 1, rotateY: 0 }}
@@ -677,6 +883,5 @@ export default function Bentolio({
           </div>
         </div>
     </div>
-    </>
   );
 }
