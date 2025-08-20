@@ -15,6 +15,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+    // Fix for lightningcss build issues on Netlify
+    if (!isServer) {
+      config.externals = config.externals || [];
+      config.externals.push('lightningcss');
+    }
+    
+    return config;
+  },
 };
 
 export default nextConfig;

@@ -113,8 +113,7 @@ export default function Bentolio({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [hoveredProjectIndex, setHoveredProjectIndex] = useState<number | null>(null);
-  const [selectedProjectImage, setSelectedProjectImage] = useState<string | null>(null);
+  const [, setHoveredProjectIndex] = useState<number | null>(null);
 
   // Navigation hover animation variants
   const navHoverVariants = {
@@ -205,7 +204,7 @@ export default function Bentolio({
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -221,8 +220,6 @@ export default function Bentolio({
     }));
   };
 
-  // Check if we're on desktop (lg and above)
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
   
 
   // Get page-specific content
@@ -771,7 +768,7 @@ export default function Bentolio({
                             exit={{ opacity: 0, y: -10 }}
                             className="p-4 bg-green-100/80 text-green-800 rounded-2xl backdrop-blur-sm"
                           >
-                            ✅ Message sent successfully! I'll get back to you soon.
+                            ✅ Message sent successfully! I&apos;ll get back to you soon.
                           </motion.div>
                         )}
                         

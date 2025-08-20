@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 export default function TestContactAPI() {
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<{status?: number; ok?: boolean; data?: unknown; error?: string} | null>(null);
   const [loading, setLoading] = useState(false);
 
   const testAPI = async () => {
@@ -76,7 +76,7 @@ export default function TestContactAPI() {
       <div style={{ marginTop: '2rem' }}>
         <h3>Instructions:</h3>
         <ol>
-          <li>Click the "Test Contact API" button above</li>
+          <li>Click the &quot;Test Contact API&quot; button above</li>
           <li>Check if the API returns success</li>
           <li>Check your MongoDB database for the test message</li>
           <li>Check the browser console and server logs for any errors</li>
