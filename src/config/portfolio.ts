@@ -339,31 +339,31 @@ export const portfolioConfig: PortfolioConfig = {
   ],
 
   about: {
-    intro: "Welcome to My Digital Universe",
+    intro: "Building Digital Dreams Into Reality",
     philosophy:
-      "I believe in building high-performance, scalable applications that not only function perfectly but provide exceptional user experiences. My passion lies in merging cutting-edge technology with elegant design solutions.",
+      "From childhood fascination with technology to winning coding competitions, my journey has been driven by an insatiable curiosity to solve complex problems through code. I don't just build applications—I craft digital experiences that make a difference. Every line of code I write is guided by the belief that technology should empower people and simplify their lives.",
     approach:
-      "I combine strong problem-solving skills with proven expertise in MERN stack development. My workflow emphasizes front-end optimization, API integration, and UI/UX best practices, delivering solutions that exceed expectations.",
+      "My development philosophy centers around three core principles: user-first design, clean maintainable code, and continuous learning. Whether I'm optimizing algorithms for 40% better performance or leading a team of 6 developers, I approach each challenge with methodical problem-solving and creative thinking. I thrive in collaborative environments where innovation meets execution.",
     specialties: [
       {
         icon: "🏆",
-        title: "Competition Winner",
-        description: "1st place in university-wide web development competition (100+ participants)",
+        title: "Award-Winning Developer",
+        description: "Competition winner among 100+ developers for exceptional web design and user experience",
       },
       {
-        icon: "🤖",
-        title: "AI/ML Integration",
-        description: "Neural Networks, Deep Learning, and Sentiment Analysis expertise",
+        icon: "🧠",
+        title: "Algorithm Enthusiast",
+        description: "Deep expertise in Data Structures & Algorithms with proven optimization achievements",
       },
       {
-        icon: "⚡",
-        title: "Performance Expert",
-        description: "50% faster load times and 99.9% app uptime achievements",
+        icon: "🚀",
+        title: "Full-Stack Architect",
+        description: "End-to-end application development with MERN stack, achieving 99.9% uptime",
       },
       {
-        icon: "👥",
-        title: "Team Leadership",
-        description: "Led 6-member frontend teams and mentored junior developers",
+        icon: "🎯",
+        title: "Technical Leader",
+        description: "Led frontend teams and mentored junior developers in modern web technologies",
       },
     ],
   },

@@ -109,6 +109,7 @@ export default function Bentolio({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [hoveredProjectIndex, setHoveredProjectIndex] = useState<number | null>(null);
   
 
   // Navigation hover animation variants
@@ -229,8 +230,8 @@ export default function Bentolio({
           curvedText: "Digital",
           description: "Explore my portfolio of web applications, mobile apps, and digital experiences. Each project represents a unique challenge solved with modern technologies and user-centered design principles.",
           projects: projects,
-          contactText: "View All Projects",
-          contactSubtext: "See complete portfolio"
+          contactText: "Commission a Project",
+          contactSubtext: "First 3 small projects are free!"
         };
       case 'ABOUT':
         return {
@@ -547,15 +548,28 @@ export default function Bentolio({
                     {pageContent.description}
                   </p>
                   {currentPage === 'ABOUT' && (
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'AWS'].map((skill) => (
-                        <span 
-                          key={skill}
-                          className="px-2 py-1 text-xs bg-white/50 rounded-lg"
-                        >
-                          {skill}
-                        </span>
-                      ))}
+                    <div className="mt-4">
+                      <h3 className={`font-medium ${config.navText} mb-3`} style={{ color: secondaryTextColor }}>
+                        Core Technologies
+                      </h3>
+                      <div className="grid grid-cols-3 gap-2">
+                        {[
+                          { name: 'React.js', level: 'Expert' },
+                          { name: 'JavaScript', level: 'Expert' },
+                          { name: 'Node.js', level: 'Advanced' },
+                          { name: 'TypeScript', level: 'Advanced' },
+                          { name: 'Python', level: 'Intermediate' },
+                          { name: 'MongoDB', level: 'Advanced' }
+                        ].map((skill) => (
+                          <div 
+                            key={skill.name}
+                            className="p-2 bg-white/80 backdrop-blur-sm rounded-lg border border-white/50 hover:bg-white/90 transition-all text-center"
+                          >
+                            <p className="font-medium text-xs text-gray-800">{skill.name}</p>
+                            <p className="text-xs text-gray-600 opacity-80">{skill.level}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </motion.div>
@@ -615,9 +629,9 @@ export default function Bentolio({
                       </p>
                     </a>
                   ) : currentPage === 'PROJECTS' ? (
-                    // Projects Page Link
-                    <Link
-                      href="/projects"
+                    // Commission Project Link
+                    <div
+                      onClick={() => setCurrentPage('CONTACT')}
                       style={{ textDecoration: "none" }}
                       className="flex flex-col justify-between items-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 h-full hover:scale-[1.02] transition-transform cursor-pointer"
                     >
@@ -630,7 +644,7 @@ export default function Bentolio({
                       <p className={`m-0 font-medium ${config.contactText}`}>
                         {pageContent.contactText}
                       </p>
-                    </Link>
+                    </div>
                   ) : (
                     // Regular Contact Link for other pages
                     <Link
@@ -804,20 +818,64 @@ export default function Bentolio({
                               </div>
                               {/* Consistent visual container for all sections - EXACT same dimensions */}
                               <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden`}>
-                                {(currentPage === 'HOME' || currentPage === 'PROJECTS') && 'image' in project && project.image && (
-                                  <Image
-                                    src={project.image}
-                                    alt={project.name}
-                                    width={330}
-                                    height={330}
-                                    className={`w-full h-full object-cover ${config.borderRadius}`}
-                                  />
+                                {(currentPage === 'HOME' || currentPage === 'PROJECTS') && (
+                                  <AnimatePresence mode="wait">
+                                    <motion.div
+                                      key={hoveredProjectIndex !== null ? `hovered-${hoveredProjectIndex}` : 'default'}
+                                      initial={{ opacity: 0 }}
+                                      animate={{ opacity: 1 }}
+                                      exit={{ opacity: 0 }}
+                                      transition={{ duration: 0.3 }}
+                                      className="w-full h-full"
+                                    >
+                                      {(() => {
+                                        // Show hovered project image if hovering over non-first project
+                                        if (hoveredProjectIndex !== null && hoveredProjectIndex > 0) {
+                                          const hoveredProject = pageContent.projects?.[hoveredProjectIndex];
+                                          if (hoveredProject && 'image' in hoveredProject && hoveredProject.image) {
+                                            return (
+                                              <Image
+                                                src={hoveredProject.image}
+                                                alt={hoveredProject.name}
+                                                width={330}
+                                                height={330}
+                                                className={`w-full h-full object-cover ${config.borderRadius}`}
+                                              />
+                                            );
+                                          }
+                                        }
+                                        // Default: show first project image
+                                        if ('image' in project && project.image) {
+                                          return (
+                                            <Image
+                                              src={project.image}
+                                              alt={project.name}
+                                              width={330}
+                                              height={330}
+                                              className={`w-full h-full object-cover ${config.borderRadius}`}
+                                            />
+                                          );
+                                        }
+                                        return null;
+                                      })()}
+                                    </motion.div>
+                                  </AnimatePresence>
                                 )}
                                 {currentPage === 'ABOUT' && (
-                                  <div className={`w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center ${config.borderRadius}`}>
-                                    <div className="text-center">
-                                      <p className="text-2xl font-bold text-gray-700 mb-2">3+</p>
-                                      <p className="text-sm text-gray-600">Years Experience</p>
+                                  <div className={`w-full h-full relative ${config.borderRadius} overflow-hidden group`}>
+                                    <Image
+                                      src="/compe-winner.jpeg"
+                                      alt="Competition Winner - Best School Website Design"
+                                      width={400}
+                                      height={300}
+                                      className={`w-full h-full object-cover ${config.borderRadius} transition-transform duration-300 group-hover:scale-105`}
+                                    />
+                                    <div className={`absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent ${config.borderRadius} flex items-end p-4`}>
+                                      <div className="text-white">
+                                        <p className="text-sm font-bold mb-1">🏆 Competition Winner</p>
+                                        <p className="text-xs opacity-90">1st Place among 100+ participants</p>
+                                        <p className="text-xs opacity-80">Best School Website Design</p>
+                                      </div>
                                     </div>
                                   </div>
                                 )}
@@ -825,6 +883,8 @@ export default function Bentolio({
                             </React.Fragment>
                           ) : (
                             <div
+                              onMouseEnter={() => setHoveredProjectIndex(index)}
+                              onMouseLeave={() => setHoveredProjectIndex(null)}
                               onClick={() => {
                                 if ('id' in project && project.id) {
                                   router.push(`/projects/${project.id}`);
