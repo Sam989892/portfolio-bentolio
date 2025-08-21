@@ -547,31 +547,6 @@ export default function Bentolio({
                   <p className={`m-0 w-full sm:w-[90%] font-light ${config.descriptionText}`}>
                     {pageContent.description}
                   </p>
-                  {currentPage === 'ABOUT' && (
-                    <div className="mt-4">
-                      <h3 className={`font-medium ${config.navText} mb-3`} style={{ color: secondaryTextColor }}>
-                        Core Technologies
-                      </h3>
-                      <div className="grid grid-cols-3 gap-2">
-                        {[
-                          { name: 'React.js', level: 'Expert' },
-                          { name: 'JavaScript', level: 'Expert' },
-                          { name: 'Node.js', level: 'Advanced' },
-                          { name: 'TypeScript', level: 'Advanced' },
-                          { name: 'Python', level: 'Intermediate' },
-                          { name: 'MongoDB', level: 'Advanced' }
-                        ].map((skill) => (
-                          <div 
-                            key={skill.name}
-                            className="p-2 bg-white/80 backdrop-blur-sm rounded-lg border border-white/50 hover:bg-white/90 transition-all text-center"
-                          >
-                            <p className="font-medium text-xs text-gray-800">{skill.name}</p>
-                            <p className="text-xs text-gray-600 opacity-80">{skill.level}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
