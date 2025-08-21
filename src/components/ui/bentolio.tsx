@@ -6,16 +6,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, X, ArrowRight, Send, Download } from "lucide-react";
-import { Dialog, DialogContent, DialogTrigger } from "./dialog";
 
 interface Project {
   id?: number;
   name: string;
   image?: string;
   link?: string;
-  subtitle?: string;
-  description?: string;
-  tags?: string[];
 }
 
 interface NameProps {
@@ -113,7 +109,8 @@ export default function Bentolio({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [, setHoveredProjectIndex] = useState<number | null>(null);
+  const [hoveredProjectIndex, setHoveredProjectIndex] = useState<number | null>(null);
+  
 
   // Navigation hover animation variants
   const navHoverVariants = {
@@ -204,7 +201,7 @@ export default function Bentolio({
       } else {
         setSubmitStatus('error');
       }
-    } catch {
+    } catch (error) {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -220,6 +217,8 @@ export default function Bentolio({
     }));
   };
 
+  // Check if we're on desktop (lg and above)
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
   
 
   // Get page-specific content
@@ -768,7 +767,7 @@ export default function Bentolio({
                             exit={{ opacity: 0, y: -10 }}
                             className="p-4 bg-green-100/80 text-green-800 rounded-2xl backdrop-blur-sm"
                           >
-                            ✅ Message sent successfully! I&apos;ll get back to you soon.
+                            ✅ Message sent successfully! I'll get back to you soon.
                           </motion.div>
                         )}
                         
@@ -817,126 +816,50 @@ export default function Bentolio({
                                   style={{ filter: 'hue-rotate(200deg)' }}
                                 />
                               </div>
-                              {/* Enhanced project details for PROJECTS page */}
-                              {currentPage === 'PROJECTS' && 'subtitle' in project && project.subtitle && (
-                                <p 
-                                  className="m-0 font-light text-lg sm:text-xl mt-2 mb-3" 
-                                  style={{ color: secondaryTextColor }}
-                                >
-                                  {project.subtitle}
-                                </p>
-                              )}
-                              {currentPage === 'PROJECTS' && 'description' in project && project.description && (
-                                <p 
-                                  className="m-0 font-light text-sm sm:text-base leading-relaxed mb-4" 
-                                  style={{ color: secondaryTextColor, opacity: 0.8 }}
-                                >
-                                  {project.description.length > 120 
-                                    ? `${project.description.substring(0, 120)}...` 
-                                    : project.description}
-                                </p>
-                              )}
-                              {currentPage === 'PROJECTS' && 'tags' in project && project.tags && project.tags.length > 0 && (
-                                <div className="flex flex-wrap gap-2 mb-4">
-                                  {project.tags.slice(0, 4).map((tag, tagIndex) => (
-                                    <span
-                                      key={tagIndex}
-                                      className="px-2 py-1 text-xs font-medium rounded-md"
-                                      style={{ 
-                                        backgroundColor: secondary + '40',
-                                        color: secondaryTextColor,
-                                        opacity: 0.9
-                                      }}
-                                    >
-                                      {tag}
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
                               {/* Consistent visual container for all sections - EXACT same dimensions */}
-                              <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden relative group`}>
-                                {(currentPage === 'HOME' || currentPage === 'PROJECTS') && 'image' in project && project.image && (
-                                  <Dialog>
-                                    <DialogTrigger asChild>
-                                      <motion.div
-                                        className="w-full h-full cursor-pointer relative"
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        transition={{ duration: 0.3, ease: "easeOut" }}
-                                      >
-                                        <Image
-                                          src={project.image}
-                                          alt={project.name}
-                                          width={330}
-                                          height={330}
-                                          className={`w-full h-full object-cover ${config.borderRadius} transition-all duration-300 group-hover:brightness-110`}
-                                        />
-                                        {/* Hover overlay */}
-                                        <motion.div
-                                          className={`absolute inset-0 bg-black/20 ${config.borderRadius} flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                                          initial={{ opacity: 0 }}
-                                          whileHover={{ opacity: 1 }}
-                                        >
-                                          <motion.div
-                                            className="bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg"
-                                            initial={{ scale: 0.8, opacity: 0 }}
-                                            whileHover={{ scale: 1, opacity: 1 }}
-                                            transition={{ duration: 0.2 }}
-                                          >
-                                            <svg
-                                              width="24"
-                                              height="24"
-                                              viewBox="0 0 24 24"
-                                              fill="none"
-                                              stroke="currentColor"
-                                              strokeWidth="2"
-                                              strokeLinecap="round"
-                                              strokeLinejoin="round"
-                                              className="text-gray-700"
-                                            >
-                                              <path d="M15 3h6v6" />
-                                              <path d="M10 14 21 3" />
-                                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                            </svg>
-                                          </motion.div>
-                                        </motion.div>
-                                      </motion.div>
-                                    </DialogTrigger>
-                                    <DialogContent className="max-w-4xl w-[90vw] h-[90vh] p-0 overflow-hidden">
-                                      <div className="relative w-full h-full flex items-center justify-center bg-black/5">
-                                        <Image
-                                          src={project.image}
-                                          alt={project.name}
-                                          width={800}
-                                          height={600}
-                                          className="max-w-full max-h-full object-contain rounded-lg"
-                                          priority
-                                        />
-                                        {/* Project info overlay */}
-                                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
-                                          <h3 className="text-2xl font-bold mb-2">{project.name}</h3>
-                                          {'subtitle' in project && project.subtitle && (
-                                            <p className="text-lg opacity-90 mb-2">{project.subtitle}</p>
-                                          )}
-                                          {'description' in project && project.description && (
-                                            <p className="text-sm opacity-80 mb-3">{project.description}</p>
-                                          )}
-                                          {'tags' in project && project.tags && project.tags.length > 0 && (
-                                            <div className="flex flex-wrap gap-2">
-                                              {project.tags.map((tag, tagIndex) => (
-                                                <span
-                                                  key={tagIndex}
-                                                  className="px-2 py-1 text-xs bg-white/20 backdrop-blur-sm rounded-md"
-                                                >
-                                                  {tag}
-                                                </span>
-                                              ))}
-                                            </div>
-                                          )}
-                                        </div>
-                                      </div>
-                                    </DialogContent>
-                                  </Dialog>
+                              <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden`}>
+                                {(currentPage === 'HOME' || currentPage === 'PROJECTS') && (
+                                  <AnimatePresence mode="wait">
+                                    <motion.div
+                                      key={hoveredProjectIndex !== null ? `hovered-${hoveredProjectIndex}` : 'default'}
+                                      initial={{ opacity: 0 }}
+                                      animate={{ opacity: 1 }}
+                                      exit={{ opacity: 0 }}
+                                      transition={{ duration: 0.3 }}
+                                      className="w-full h-full"
+                                    >
+                                      {(() => {
+                                        // Show hovered project image if hovering over non-first project
+                                        if (hoveredProjectIndex !== null && hoveredProjectIndex > 0) {
+                                          const hoveredProject = pageContent.projects?.[hoveredProjectIndex];
+                                          if (hoveredProject && 'image' in hoveredProject && hoveredProject.image) {
+                                            return (
+                                              <Image
+                                                src={hoveredProject.image}
+                                                alt={hoveredProject.name}
+                                                width={330}
+                                                height={330}
+                                                className={`w-full h-full object-cover ${config.borderRadius}`}
+                                              />
+                                            );
+                                          }
+                                        }
+                                        // Default: show first project image
+                                        if ('image' in project && project.image) {
+                                          return (
+                                            <Image
+                                              src={project.image}
+                                              alt={project.name}
+                                              width={330}
+                                              height={330}
+                                              className={`w-full h-full object-cover ${config.borderRadius}`}
+                                            />
+                                          );
+                                        }
+                                        return null;
+                                      })()}
+                                    </motion.div>
+                                  </AnimatePresence>
                                 )}
                                 {currentPage === 'ABOUT' && (
                                   <div className={`w-full h-full relative ${config.borderRadius} overflow-hidden group`}>
@@ -953,14 +876,6 @@ export default function Bentolio({
                                         <p className="text-xs opacity-90">1st Place among 100+ participants</p>
                                         <p className="text-xs opacity-80">Best School Website Design</p>
                                       </div>
-                                    </div>
-                                  </div>
-                                )}
-                                {currentPage === 'CONTACT' && (
-                                  <div className={`w-full h-full bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center ${config.borderRadius}`}>
-                                    <div className="text-center">
-                                      <p className="text-lg font-bold text-gray-700 mb-2">Available</p>
-                                      <p className="text-sm text-gray-600">For New Projects</p>
                                     </div>
                                   </div>
                                 )}
@@ -983,15 +898,6 @@ export default function Bentolio({
                               <p className={`m-0 font-medium ${config.projectText}`}>
                                 {project.name}
                               </p>
-                              {/* Enhanced subtitle for subsequent projects on PROJECTS page */}
-                              {currentPage === 'PROJECTS' && 'subtitle' in project && project.subtitle && (
-                                <p 
-                                  className="m-0 font-light text-sm sm:text-base mt-1" 
-                                  style={{ color: secondaryTextColor, opacity: 0.7 }}
-                                >
-                                  {project.subtitle}
-                                </p>
-                              )}
                             </div>
                           )}
                         </div>
