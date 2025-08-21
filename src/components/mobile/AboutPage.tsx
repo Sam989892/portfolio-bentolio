@@ -33,7 +33,7 @@ function AboutHeader() {
   return (
     <motion.section
       ref={ref}
-      className="bg-gradient-to-br from-[#e3f2f9] to-[#aecfdc]/30 rounded-[30px] p-8 mx-4 mt-20 mb-8 relative overflow-hidden"
+      className="bg-white/25 backdrop-blur-[10px] border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-[30px] p-8 mx-4 mt-20 mb-8 relative overflow-hidden"
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -139,7 +139,7 @@ function StatsSection() {
   return (
     <motion.section
       ref={ref}
-      className="bg-gradient-to-br from-[#aecfdc] to-[#aecfdc]/80 rounded-[30px] p-8 mx-4 mb-8 relative overflow-hidden"
+      className="bg-white/25 backdrop-blur-[10px] border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-[30px] p-8 mx-4 mb-8 relative overflow-hidden"
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}

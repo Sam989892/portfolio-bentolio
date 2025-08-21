@@ -22,7 +22,7 @@ function PageIndicator({ currentPage }: { currentPage: string }) {
       transition={{ delay: 0.5 }}
       className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-30"
     >
-      <div className="bg-[#e3f2f9]/90 backdrop-blur-sm px-3 py-1 rounded-full border border-[#aecfdc]/20">
+      <div className="bg-white/25 backdrop-blur-[10px] border border-white/30 px-3 py-1 rounded-full shadow-lg">
         <span className="text-xs font-light text-[#1d1d1f]/70 uppercase">
           {pages[currentPage as keyof typeof pages]?.label || currentPage}
         </span>

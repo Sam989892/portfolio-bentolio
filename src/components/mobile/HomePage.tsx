@@ -37,7 +37,7 @@ function HeroSection() {
   return (
     <motion.section
       style={{ y }}
-      className="bg-gradient-to-br from-[#e3f2f9] to-[#aecfdc]/30 rounded-[30px] p-8 mx-4 mt-20 mb-6 relative overflow-hidden min-h-[400px] flex items-center"
+      className="bg-white/25 backdrop-blur-[10px] border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-[30px] p-8 mx-4 mt-20 mb-6 relative overflow-hidden min-h-[400px] flex items-center"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}

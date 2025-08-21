@@ -12,7 +12,13 @@ function ContactHeader() {
   return (
     <motion.section
       ref={ref}
-      className="bg-gradient-to-br from-[#aecfdc] to-[#aecfdc]/80 rounded-[30px] p-8 mx-4 mt-20 mb-8 relative overflow-hidden"
+      className="bg-gradient-to-br from-[url('/celestials-dark-bg.webp')] bg-cover bg-center bg-no-repeat backdrop-blur-[8px] border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] rounded-[30px] p-8 mx-4 mt-20 mb-8 relative overflow-hidden"
+      style={{ 
+        backgroundImage: "url('/celestials-dark-bg.webp')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backdropFilter: "blur(8px)"
+      }}
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -46,7 +52,7 @@ function ContactHeader() {
       </motion.div>
 
       <motion.h1
-        className="font-medium text-[#000000] text-[40px] sm:text-[52px] mb-6"
+        className="font-medium text-white text-[40px] sm:text-[52px] mb-6"
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8 }}
@@ -55,7 +61,7 @@ function ContactHeader() {
       </motion.h1>
 
       <motion.p
-        className="font-light text-[#000000] text-[18px] leading-7 max-w-md"
+        className="font-light text-white text-[18px] leading-7 max-w-md"
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.8 }}
@@ -276,7 +282,7 @@ function ContactInfo() {
   return (
     <motion.section
       ref={ref}
-      className="bg-gradient-to-br from-[#e3f2f9] to-[#e3f2f9]/70 rounded-[30px] p-8 mx-4 mb-8 relative overflow-hidden"
+      className="bg-white/25 backdrop-blur-[10px] border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-[30px] p-8 mx-4 mb-8 relative overflow-hidden"
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -309,7 +315,7 @@ function ContactInfo() {
                 <h3 className="font-medium text-[#000000] text-[18px] mb-1">
                   {method.title}
                 </h3>
-                <p className="font-light text-[#000000] text-[16px] mb-2">
+                <p className="font-light text-white text-[16px] mb-2">
                   {method.value}
                 </p>
                 <p className="font-light text-[#000000]/60 text-[14px]">
