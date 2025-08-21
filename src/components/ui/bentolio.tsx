@@ -281,7 +281,12 @@ export default function Bentolio({
         {/* Static Header - No animations on page change */}
         <header className={config.headerClass}>
           <motion.div
-            style={{ backgroundColor: bg }}
+            style={{ 
+              backgroundImage: "url('/francium-light-bg.jpeg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat"
+            }}
             initial={isInitialLoad ? { scale: 0 } : false}
             animate={{ scale: 1 }}
             transition={isInitialLoad ? { ...staticAnimation, delay: 0 } : { duration: 0 }}
@@ -388,7 +393,10 @@ export default function Bentolio({
                   exit="closed"
                   className="sm:hidden absolute top-full left-0 right-0 mt-3 mx-4 z-50 shadow-2xl border border-white/30 overflow-hidden backdrop-blur-xl"
                   style={{ 
-                    backgroundColor: `${bg}f0`, // Adding transparency
+                    backgroundImage: "url('/francium-light-bg.jpeg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
                     borderRadius: '20px'
                   }}
                 >
@@ -455,7 +463,10 @@ export default function Bentolio({
                   exit={isInitialLoad ? {} : { rotateY: 90 }}
                   transition={isInitialLoad ? { ...staticAnimation, delay: 0.1 } : flipAnimation}
                   style={{ 
-                    backgroundColor: bg,
+                    backgroundImage: "url('/francium-light-bg.jpeg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",
                   }}
@@ -530,7 +541,10 @@ export default function Bentolio({
                   exit={isInitialLoad ? {} : { rotateY: 90 }}
                   transition={isInitialLoad ? { ...staticAnimation, delay: 0.4 } : { ...flipAnimation, delay: 0.1 }}
                   style={{ 
-                    backgroundColor: bg,
+                    backgroundImage: "url('/francium-light-bg.jpeg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",
                   }}
@@ -561,8 +575,11 @@ export default function Bentolio({
                   exit={isInitialLoad ? {} : { rotateY: 90 }}
                   transition={isInitialLoad ? { ...staticAnimation, delay: 0.5 } : { ...flipAnimation, delay: 0.2 }}
                   style={{ 
-                    backgroundColor: secondary, 
-                    color: secondaryTextColor,
+                    backgroundImage: "url('/celestials-dark-bg.jpeg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    color: "white",
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",
                   }}
@@ -654,8 +671,13 @@ export default function Bentolio({
                   exit={isInitialLoad ? {} : { rotateY: 90 }}
                   transition={isInitialLoad ? { ...staticAnimation, delay: 0.6 } : { ...flipAnimation, delay: 0.3 }}
                   style={{ 
-                    backgroundColor: currentPage === 'CONTACT' ? secondary : bg,
-                    color: currentPage === 'CONTACT' ? secondaryTextColor : "#1d1d1f",
+                    backgroundImage: currentPage === 'CONTACT' 
+                      ? "url('/celestials-dark-bg.jpeg')" 
+                      : "url('/francium-light-bg.jpeg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    color: currentPage === 'CONTACT' ? "white" : "#1d1d1f",
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",
                   }}
@@ -890,7 +912,10 @@ export default function Bentolio({
                   key={`social-links-${currentPage}`}
                   className={`flex justify-between items-center ${config.componentPadding} ${config.borderRadius} font-light ${config.socialText}`}
                   style={{ 
-                    backgroundColor: bg,
+                    backgroundImage: "url('/francium-light-bg.jpeg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",
                   }}
