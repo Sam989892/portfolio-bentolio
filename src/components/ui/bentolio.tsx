@@ -86,7 +86,7 @@ export default function Bentolio({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   bg = "#e3f2f9",
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  secondary = "#aecfdc", 
+  secondary = "#a855f7", 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   secondaryTextColor = "#1d1d1f",
   name,
@@ -315,21 +315,21 @@ export default function Bentolio({
                   onClick={() => handleNavClick(link)}
                   className={`font-light ${config.navText} relative px-3 py-2 rounded-lg ${
                     currentPage === link 
-                      ? 'text-blue-600 bg-blue-50/80' 
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/40'
+                      ? 'text-purple-700 bg-gradient-to-r from-purple-100 to-pink-100' 
+                      : 'text-gray-700 hover:text-purple-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50'
                   } transition-all duration-200 ease-out`}
                 >
                   <span className="relative z-10">{link}</span>
                   {currentPage === link && (
                     <motion.div
                       layoutId="activeIndicator"
-                      className="absolute inset-0 bg-blue-100/60 rounded-lg border border-blue-200/50"
+                      className="absolute inset-0 bg-gradient-to-r from-purple-100/80 to-pink-100/80 rounded-lg border border-purple-200/50"
                       initial={false}
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     />
                   )}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-lg opacity-0"
+                    className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-lg opacity-0"
                     whileHover={{ opacity: 1 }}
                     transition={{ duration: 0.2 }}
                   />
@@ -412,17 +412,17 @@ export default function Bentolio({
                         whileTap={{ scale: 0.98 }}
                         className={`flex items-center justify-between w-full text-left p-4 rounded-2xl transition-all duration-200 mb-1 ${
                           currentPage === link
-                            ? 'bg-blue-500/20 text-blue-700 shadow-lg scale-[1.02]'
+                            ? 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-700 shadow-lg scale-[1.02]'
                             : 'text-gray-700 hover:bg-white/40 active:bg-white/60'
                         }`}
                       >
                         <div className="flex items-center space-x-3">
                           <div className={`w-2 h-2 rounded-full transition-all duration-200 ${
                             currentPage === link 
-                              ? 'bg-blue-500 scale-150' 
+                              ? 'bg-gradient-to-r from-purple-500 to-pink-500 scale-150' 
                               : 'bg-gray-300 scale-100'
                           }`} />
-                          <span className={`font-semibold text-lg ${currentPage === link ? 'text-blue-700' : 'text-gray-800'}`}>
+                          <span className={`font-semibold text-lg ${currentPage === link ? 'text-purple-700' : 'text-gray-800'}`}>
                             {link}
                           </span>
                         </div>
@@ -436,7 +436,7 @@ export default function Bentolio({
                           <ArrowRight
                             size={20}
                             className={`transition-all duration-200 ${
-                              currentPage === link ? 'text-blue-600' : 'text-gray-500'
+                              currentPage === link ? 'text-purple-600' : 'text-gray-500'
                             }`}
                             strokeWidth={2.5}
                           />
@@ -446,7 +446,7 @@ export default function Bentolio({
                   </div>
                   
                   {/* Bottom indicator */}
-                  <div className="h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 opacity-30" />
+                  <div className="h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 opacity-30" />
                 </motion.div>
               </>
             )}
@@ -490,7 +490,7 @@ export default function Bentolio({
                         width={80}
                         height={80}
                         className="w-full h-full"
-                        style={{ filter: 'hue-rotate(200deg)' }}
+                        style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
                       />
                     </motion.div>
                   </div>
@@ -559,7 +559,7 @@ export default function Bentolio({
                     width={32}
                     height={32}
                     className={config.iconSizes}
-                    style={{ filter: 'hue-rotate(200deg)' }}
+                    style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
                   />
                   <p className={`m-0 w-full sm:w-[90%] font-light ${config.descriptionText}`}>
                     {pageContent.description}
@@ -825,7 +825,7 @@ export default function Bentolio({
                                   width={24}
                                   height={24}
                                   className={config.iconSizes}
-                                  style={{ filter: 'hue-rotate(200deg)' }}
+                                  style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
                                 />
                               </div>
                               {/* Consistent visual container for all sections - EXACT same dimensions */}
@@ -905,7 +905,7 @@ export default function Bentolio({
                                 }
                               }}
                               className="py-3 sm:py-4 md:py-6 lg:py-8 border-t-[2px] cursor-pointer hover:bg-white/20 transition-colors"
-                              style={{ borderTopColor: "#aecfdc" }}
+                              style={{ borderTopColor: "#a855f7" }}
                             >
                               <p className={`m-0 font-medium ${config.projectText}`}>
                                 {project.name}

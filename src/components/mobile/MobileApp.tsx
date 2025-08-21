@@ -69,7 +69,7 @@ function MobileNav({ currentPage, onPageChange }: { currentPage: string; onPageC
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
           onClick={() => handleNavigation('home')}
-          className="font-light text-[#1d1d1f] text-[20px] uppercase hover:text-[#3B82F6] transition-colors"
+          className="font-light text-[#1d1d1f] text-[20px] uppercase hover:text-purple-600 transition-colors"
         >
           <span className="font-light italic">{portfolioConfig.personal.firstName}</span>{" "}
           <span className="font-medium">{portfolioConfig.personal.lastName}</span>
@@ -112,7 +112,7 @@ function MobileNav({ currentPage, onPageChange }: { currentPage: string; onPageC
               onClick={() => handleNavigation(key)}
               className={`text-left p-3 rounded-lg transition-colors ${
                 currentPage === key 
-                  ? 'bg-white/30 text-[#1d1d1f] font-medium' 
+                  ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-purple-800 font-medium' 
                   : 'hover:bg-white/20 text-[#1d1d1f]'
               }`}
             >
@@ -138,7 +138,7 @@ function FloatingElements() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-1/4 right-8 w-4 h-4 bg-[#aecfdc]/30 rounded-full"
+        className="absolute top-1/4 right-8 w-4 h-4 bg-[#a855f7]/30 rounded-full"
       />
       <motion.div
         animate={{ 
@@ -164,7 +164,7 @@ function FloatingElements() {
           ease: "easeInOut",
           delay: 1
         }}
-        className="absolute top-1/2 right-4 w-3 h-3 bg-[#aecfdc]/20 rounded-full"
+        className="absolute top-1/2 right-4 w-3 h-3 bg-[#a855f7]/20 rounded-full"
       />
     </div>
   );

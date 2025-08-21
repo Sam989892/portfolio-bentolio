@@ -18,7 +18,7 @@ function FlowerIcon({ animate = false }) {
         viewBox="0 0 119 119"
       >
         <g clipPath="url(#clip0_2_74)">
-          <path d={svgPaths.p12a08980} fill="#aecfdc" />
+          <path d={svgPaths.p12a08980} fill="#a855f7" />
         </g>
         <defs>
           <clipPath id="clip0_2_74">
@@ -63,7 +63,7 @@ function HeroSection() {
             }
           </motion.span>
           <motion.span
-            className="font-light italic text-[#3B82F6]"
+            className="font-light italic text-purple-600"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.9, type: "spring" }}
@@ -103,7 +103,7 @@ function HeroSection() {
       </motion.div>
 
       <motion.div
-        className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#aecfdc]/20 rounded-full"
+        className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#a855f7]/20 rounded-full"
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 4, repeat: Infinity }}
       />
@@ -142,7 +142,7 @@ function PortraitSection() {
         initial={{ opacity: 0, x: 50 }}
         animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
         transition={{ delay: 0.5, duration: 0.8 }}
-        className="absolute -bottom-4 -right-2 bg-[#e3f2f9] rounded-[20px] p-4 shadow-lg max-w-[200px]"
+        className="absolute -bottom-4 -right-2 bg-white/25 backdrop-blur-[10px] border border-white/30 rounded-[20px] p-4 shadow-lg max-w-[200px]"
       >
         <p className="font-light italic text-[#1d1d1f] text-[12px]">
           &quot;AI is not replacing creativity, it&apos;s amplifying it&quot;

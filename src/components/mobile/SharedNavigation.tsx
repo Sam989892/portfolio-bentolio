@@ -28,21 +28,21 @@ export default function SharedNavigation({ currentPage, onNavigate }: SharedNavi
       title: 'Projects',
       subtitle: 'View my work',
       icon: '💼',
-      color: 'from-blue-50 to-blue-100'
+      color: 'from-purple-50 to-pink-100'
     },
     {
       key: 'about',
       title: 'About',
       subtitle: 'My story',
       icon: '👨‍💻',
-      color: 'from-purple-50 to-purple-100'
+      color: 'from-pink-50 to-purple-100'
     },
     {
       key: 'contact',
       title: 'Contact',
       subtitle: 'Get in touch',
       icon: '📬',
-      color: 'from-green-50 to-green-100'
+      color: 'from-purple-100 to-pink-100'
     }
   ];
 

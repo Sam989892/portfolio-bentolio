@@ -51,8 +51,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
 
         <motion.button
-          className="w-12 h-12 flex items-center justify-center rounded-full bg-[#aecfdc]/30"
-          whileHover={{ scale: 1.1, backgroundColor: "#aecfdc" }}
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-[#a855f7]/30"
+          whileHover={{ scale: 1.1, backgroundColor: "#a855f7" }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsExpanded(!isExpanded)}
         >
@@ -89,7 +89,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="px-3 py-1 bg-[#aecfdc]/20 rounded-full text-[12px] font-medium text-[#1d1d1f]"
+            className="px-3 py-1 bg-[#a855f7]/20 rounded-full text-[12px] font-medium text-[#1d1d1f]"
           >
             {tag}
           </span>
@@ -103,7 +103,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           opacity: isExpanded ? 1 : 0,
         }}
         transition={{ duration: 0.3 }}
-        className="overflow-hidden border-t border-[#aecfdc]/30 pt-6"
+        className="overflow-hidden border-t border-[#a855f7]/30 pt-6"
       >
         <div className="grid grid-cols-2 gap-4">
           <motion.button
@@ -128,7 +128,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </motion.div>
 
       <motion.div
-        className="absolute -top-6 -right-6 w-16 h-16 bg-[#aecfdc]/10 rounded-full"
+        className="absolute -top-6 -right-6 w-16 h-16 bg-[#a855f7]/10 rounded-full"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />

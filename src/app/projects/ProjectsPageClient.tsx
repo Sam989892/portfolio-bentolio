@@ -109,7 +109,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                       alt="flower"
                       width={60}
                       height={60}
-                      style={{ filter: 'hue-rotate(200deg)' }}
+                      style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
                     />
                   </motion.div>
                 </div>
@@ -146,7 +146,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                   </div>
                   <Link
                     href={`/projects/${currentProject.id}`}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all text-sm font-medium"
                   >
                     Read More
                     <ArrowRight className="w-4 h-4" />
@@ -218,7 +218,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                 width={32}
                 height={32}
                 className={config.iconSizes}
-                style={{ filter: 'hue-rotate(200deg)' }}
+                style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
               />
               
               <div className="flex-1 w-full">
@@ -229,7 +229,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                 
                 <div className="grid grid-cols-2 gap-4 w-full">
                   <div>
-                    <h4 className="text-xl font-bold text-blue-600 mb-1">
+                    <h4 className="text-xl font-bold text-purple-600 mb-1">
                       {projects.filter(p => p.status === 'Completed').length}
                     </h4>
                     <p className="text-sm text-gray-600">Completed</p>
@@ -304,7 +304,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                       width={24}
                       height={24}
                       className={config.iconSizes}
-                      style={{ filter: 'hue-rotate(200deg)' }}
+                      style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
                     />
                   </div>
                   
@@ -356,19 +356,19 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
             >
               <Link
                 href="/"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className="text-gray-700 hover:text-purple-600 transition-colors"
               >
                 Home
               </Link>
               <Link
                 href="/#about"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className="text-gray-700 hover:text-purple-600 transition-colors"
               >
                 About
               </Link>
               <Link
                 href="/#contact"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className="text-gray-700 hover:text-purple-600 transition-colors"
               >
                 Contact
               </Link>

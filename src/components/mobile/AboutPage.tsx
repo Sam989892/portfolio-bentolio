@@ -14,7 +14,7 @@ function CircleIcon({ animate = false }) {
     >
       <svg className="block size-full" fill="none" viewBox="0 0 38 38">
         <g clipPath="url(#clip0_2_86)">
-          <path d={svgPaths.p21c04900} fill="#aecfdc" />
+          <path d={svgPaths.p21c04900} fill="#a855f7" />
         </g>
         <defs>
           <clipPath id="clip0_2_86">
@@ -56,7 +56,7 @@ function AboutHeader() {
       </motion.div>
 
       <motion.div
-        className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#aecfdc]/20 rounded-full"
+        className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#a855f7]/20 rounded-full"
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 4, repeat: Infinity }}
       />
@@ -105,7 +105,7 @@ function BioSection() {
       </motion.div>
 
       <motion.div
-        className="absolute -top-6 -left-6 w-16 h-16 bg-[#aecfdc]/10 rounded-full"
+        className="absolute -top-6 -left-6 w-16 h-16 bg-[#a855f7]/10 rounded-full"
         animate={{ rotate: 360 }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       />
@@ -224,7 +224,7 @@ function SkillsSection() {
         {skills.map((skillGroup, index) => (
           <motion.div
             key={skillGroup.category}
-            className="border-b border-[#aecfdc]/30 pb-6 last:border-b-0"
+            className="border-b border-[#a855f7]/30 pb-6 last:border-b-0"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
             transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
@@ -236,7 +236,7 @@ function SkillsSection() {
               {skillGroup.items.map((skill, skillIndex) => (
                 <motion.span
                   key={skill}
-                  className="px-3 py-2 bg-[#aecfdc]/20 rounded-full text-[14px] font-light text-[#1d1d1f]"
+                  className="px-3 py-2 bg-[#a855f7]/20 rounded-full text-[14px] font-light text-[#1d1d1f]"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={
                     inView ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1 }
@@ -273,7 +273,7 @@ function ContactInfo() {
   return (
     <motion.section
       ref={ref}
-      className="bg-[#e3f2f9] rounded-[30px] p-8 mx-4 mb-12 relative overflow-hidden"
+      className="bg-white/25 backdrop-blur-[10px] border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-[30px] p-8 mx-4 mb-12 relative overflow-hidden"
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -298,7 +298,7 @@ function ContactInfo() {
               animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
               transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
             >
-              <div className="w-10 h-10 bg-[#aecfdc]/20 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-[#a855f7]/20 rounded-full flex items-center justify-center">
                 <Icon size={18} className="text-[#000000]" />
               </div>
               <div>

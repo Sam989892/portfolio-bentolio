@@ -189,7 +189,7 @@ function ContactForm() {
             value={formData.subject}
             onChange={handleInputChange}
             required
-            className="w-full px-4 py-3 bg-[#aecfdc]/10 border border-[#aecfdc]/20 rounded-[15px] font-light text-[#000000] text-[16px] focus:outline-none focus:ring-2 focus:ring-[#aecfdc]/50 focus:border-transparent transition-all"
+            className="w-full px-4 py-3 bg-[#a855f7]/10 border border-[#a855f7]/20 rounded-[15px] font-light text-[#000000] text-[16px] focus:outline-none focus:ring-2 focus:ring-[#a855f7]/50 focus:border-transparent transition-all"
             placeholder="What would you like to discuss?"
           />
         </motion.div>
@@ -242,7 +242,7 @@ function ContactForm() {
       </motion.form>
 
       <motion.div
-        className="absolute -top-6 -right-6 w-16 h-16 bg-[#aecfdc]/10 rounded-full"
+        className="absolute -top-6 -right-6 w-16 h-16 bg-[#a855f7]/10 rounded-full"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
@@ -308,7 +308,7 @@ function ContactInfo() {
               transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
               whileHover={{ scale: 1.02 }}
             >
-              <div className="w-12 h-12 bg-[#aecfdc]/30 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-[#a855f7]/30 rounded-full flex items-center justify-center flex-shrink-0">
                 <Icon size={20} className="text-[#000000]" />
               </div>
               <div className="flex-1">
