@@ -34,7 +34,16 @@ export default function ResponsivePortfolio() {
   return (
     <>
       {isMobile ? (
-        <div className="md:hidden">
+        <div 
+          className="md:hidden min-h-screen"
+          style={{ 
+            backgroundImage: "url('/dreamy-fabrica-bg.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed"
+          }}
+        >
           <MobileApp />
         </div>
       ) : (

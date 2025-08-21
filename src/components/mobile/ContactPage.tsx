@@ -114,7 +114,7 @@ function ContactForm() {
   return (
     <motion.section
       ref={ref}
-      className="bg-[#e3f2f9] rounded-[30px] p-8 mx-4 mb-8 relative overflow-hidden"
+      className="bg-white/25 backdrop-blur-[10px] border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-[30px] p-8 mx-4 mb-8 relative overflow-hidden"
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -150,7 +150,7 @@ function ContactForm() {
               value={formData.name}
               onChange={handleInputChange}
               required
-              className="w-full px-4 py-3 bg-[#aecfdc]/10 border border-[#aecfdc]/20 rounded-[15px] font-light text-[#000000] text-[16px] focus:outline-none focus:ring-2 focus:ring-[#aecfdc]/50 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-white/20 backdrop-blur-[5px] border border-white/30 rounded-[15px] font-light text-[#000000] text-[16px] focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
               placeholder="Your full name"
             />
           </motion.div>
@@ -169,7 +169,7 @@ function ContactForm() {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="w-full px-4 py-3 bg-[#aecfdc]/10 border border-[#aecfdc]/20 rounded-[15px] font-light text-[#000000] text-[16px] focus:outline-none focus:ring-2 focus:ring-[#aecfdc]/50 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-white/20 backdrop-blur-[5px] border border-white/30 rounded-[15px] font-light text-[#000000] text-[16px] focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
               placeholder="your.email@example.com"
             />
           </motion.div>
@@ -208,7 +208,7 @@ function ContactForm() {
             onChange={handleInputChange}
             required
             rows={5}
-            className="w-full px-4 py-3 bg-[#aecfdc]/10 border border-[#aecfdc]/20 rounded-[15px] font-light text-[#000000] text-[16px] focus:outline-none focus:ring-2 focus:ring-[#aecfdc]/50 focus:border-transparent transition-all resize-none"
+            className="w-full px-4 py-3 bg-white/20 backdrop-blur-[5px] border border-white/30 rounded-[15px] font-light text-[#000000] text-[16px] focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all resize-none"
             placeholder="Tell me about your project or inquiry..."
           />
         </motion.div>
@@ -302,7 +302,7 @@ function ContactInfo() {
           return (
             <motion.div
               key={method.title}
-              className="flex items-start gap-4 p-4 bg-[#aecfdc]/10 rounded-[20px]"
+              className="flex items-start gap-4 p-4 bg-white/20 backdrop-blur-[5px] border border-white/30 rounded-[20px]"
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
@@ -342,7 +342,7 @@ function SocialsSection() {
   return (
     <motion.section
       ref={ref}
-      className="bg-[#e3f2f9] rounded-[30px] p-8 mx-4 mb-12"
+      className="bg-white/25 backdrop-blur-[10px] border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-[30px] p-8 mx-4 mb-12"
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -363,7 +363,7 @@ function SocialsSection() {
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between p-4 bg-[#aecfdc]/10 rounded-[20px] border border-[#aecfdc]/20"
+            className="flex items-center justify-between p-4 bg-white/20 backdrop-blur-[5px] border border-white/30 rounded-[20px]"
             initial={{ opacity: 0, x: -20 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
             transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}

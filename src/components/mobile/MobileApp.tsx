@@ -41,7 +41,7 @@ function FloatingProjectsButton({ currentPage, onNavigate }: { currentPage: stri
       exit={{ scale: 0, opacity: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       onClick={() => onNavigate('projects')}
-      className="fixed bottom-20 right-4 z-30 bg-[#3B82F6] text-white p-4 rounded-full shadow-lg hover:bg-[#2563EB] active:scale-95 transition-all"
+      className="fixed bottom-20 right-4 z-30 bg-white/30 backdrop-blur-[10px] border border-white/40 text-black p-4 rounded-full shadow-lg hover:bg-white/40 active:scale-95 transition-all"
       whileTap={{ scale: 0.9 }}
     >
       <FolderOpen size={20} />
@@ -61,7 +61,7 @@ function MobileNav({ currentPage, onPageChange }: { currentPage: string; onPageC
     <motion.div 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-[#e3f2f9]/95 backdrop-blur-md border-b border-[#aecfdc]/20"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/25 backdrop-blur-[10px] border-b border-white/30"
     >
       <div className="flex items-center justify-between p-4">
         <motion.button
