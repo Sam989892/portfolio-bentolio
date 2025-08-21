@@ -5,9 +5,8 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    // Preload other background images
-    const img1 = new Image(); img1.src = '/francium-light-bg.webp';
-    const img2 = new Image(); img2.src = '/celestials-dark-bg.webp';
+    // Preload background image
+    const img = new Image(); img.src = '/celestials-dark-bg.webp';
   }, []);
 
   return (
