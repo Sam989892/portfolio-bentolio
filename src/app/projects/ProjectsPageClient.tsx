@@ -35,25 +35,13 @@ const flipAnimation = {
 
 export default function ProjectsPageClient({ projects }: ProjectsPageClientProps) {
   const router = useRouter();
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [selectedProject] = useState<typeof projects[0] | null>(null);
+  const [isInitialLoad] = useState(true);
   
   const bg = "#e3f2f9";
   const secondary = "#aecfdc";
   
-  const handleProjectClick = (project: typeof projects[0]) => {
-    setSelectedProject(project);
-    if (isInitialLoad) setIsInitialLoad(false);
-  };
-
-  const handleBackClick = () => {
-    setSelectedProject(null);
-  };
-
   const currentProject = selectedProject || projects[0];
-  const otherProjects = selectedProject 
-    ? projects.filter(p => p.id !== selectedProject.id)
-    : projects.slice(1);
 
   return (
     <div className={`${config.containerClass} min-h-screen`} style={{ color: "#1d1d1f" }}>
@@ -291,7 +279,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
               className={`${config.componentPadding} ${config.borderRadius} h-full`}
             >
               {/* Featured project in the main area, so show other projects here */}
-              {projects.slice(0, 1).map((project, index) => (
+              {projects.slice(0, 1).map((project) => (
                 <div key={`main-project-${project.id}`}>
                   <div
                     onClick={() => {
@@ -336,7 +324,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
               ))}
               
               {/* List remaining projects compactly */}
-              {projects.slice(1).map((project, index) => (
+              {projects.slice(1).map((project) => (
                 <div
                   key={`list-project-${project.id}`}
                   onClick={() => {

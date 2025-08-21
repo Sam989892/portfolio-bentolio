@@ -83,8 +83,11 @@ const staticAnimation = {
 };
 
 export default function Bentolio({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   bg = "#e3f2f9",
-  secondary = "#aecfdc",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  secondary = "#aecfdc", 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   secondaryTextColor = "#1d1d1f",
   name,
   title,
@@ -201,7 +204,7 @@ export default function Bentolio({
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -218,7 +221,7 @@ export default function Bentolio({
   };
 
   // Check if we're on desktop (lg and above)
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
+  // const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
   
 
   // Get page-specific content
@@ -776,7 +779,7 @@ export default function Bentolio({
                             exit={{ opacity: 0, y: -10 }}
                             className="p-4 bg-green-100/80 text-green-800 rounded-2xl backdrop-blur-sm"
                           >
-                            ✅ Message sent successfully! I'll get back to you soon.
+                            ✅ Message sent successfully! I&apos;ll get back to you soon.
                           </motion.div>
                         )}
                         

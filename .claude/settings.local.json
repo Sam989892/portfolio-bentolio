@@ -22,7 +22,8 @@
       "Bash(powershell:*)",
       "Bash(curl:*)",
       "Bash(git pull:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }
