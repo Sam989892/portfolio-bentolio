@@ -579,6 +579,9 @@ export default function Bentolio({
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
+                    backdropFilter: "blur(8px)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
                     color: "white",
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",
@@ -676,6 +679,9 @@ export default function Bentolio({
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
+                      backdropFilter: "blur(8px)",
+                      border: "1px solid rgba(255, 255, 255, 0.2)",
+                      boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
                       color: "white"
                     } : {
                       background: "rgba(255, 255, 255, 0.25)",
