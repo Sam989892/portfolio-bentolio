@@ -24,7 +24,9 @@
       "Bash(git pull:*)",
       "Bash(ls:*)",
       "Bash(grep:*)",
-      "Bash(npm i:*)"
+      "Bash(npm i:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)"
     ],
     "deny": []
   }
