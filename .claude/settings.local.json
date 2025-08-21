@@ -21,7 +21,8 @@
       "Bash(node:*)",
       "Bash(powershell:*)",
       "Bash(curl:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }

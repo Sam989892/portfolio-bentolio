@@ -130,7 +130,7 @@ function PortraitSection() {
       >
         <motion.div
           className="w-full h-[120%] -mt-6 bg-center bg-cover bg-no-repeat"
-          style={{ backgroundImage: `url('/portrait.jpeg')` }}
+          style={{ backgroundImage: `url('/portrait.webp')` }}
           initial={{ scale: 1.1 }}
           animate={inView ? { scale: 1 } : { scale: 1 }}
           transition={{ duration: 1.2 }}

@@ -91,7 +91,7 @@ export default function Bentolio({
   curvedText,
   description,
   projects,
-  profileImage = "/portrait.jpeg",
+  profileImage = "/portrait.webp",
   socialLinks,
   contactLink = "#",
   navLinks,
@@ -873,7 +873,7 @@ export default function Bentolio({
                                 {currentPage === 'ABOUT' && (
                                   <div className={`w-full h-full relative ${config.borderRadius} overflow-hidden group`}>
                                     <Image
-                                      src="/compe-winner.jpeg"
+                                      src="/compe-winner.webp"
                                       alt="Competition Winner - Best School Website Design"
                                       width={400}
                                       height={300}

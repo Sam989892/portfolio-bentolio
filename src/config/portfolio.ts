@@ -113,7 +113,7 @@ export const portfolioConfig: PortfolioConfig = {
     description:
       "Full-stack developer with expertise in React.js, JavaScript, RESTful APIs, and Data Structures & Algorithms. Competition winner for best school website design (100+ entries). Strong foundation in SQL and MongoDB with proven problem-solving abilities.",
     location: "Karelibaugh, Vadodara, Gujarat",
-    profileImage: "/portrait.jpeg",
+    profileImage: "/portrait.webp",
   },
 
   contact: {
@@ -153,14 +153,14 @@ export const portfolioConfig: PortfolioConfig = {
       subtitle: "Frontend Developer | Competition Winner",
       description:
         "Built responsive school landing page using HTML, CSS, JavaScript with interactive UI elements. Won 1st place among 100+ entries for best design and user experience. Implemented modern frontend practices and accessibility standards.",
-      image: "/schoollpic.png",
+      image: "/schoollpic.webp",
       link: "https://delicate-tapioca-2de161.netlify.app/",
       date: "2024",
       category: "Web Development",
       tags: ["HTML5", "CSS3", "JavaScript", "UI/UX"],
       status: "Completed",
       slug: "award-winning-school-website",
-      gallery: ["/schoollpic.png", "/schoollpic.png", "/schoollpic.png"],
+      gallery: ["/schoollpic.webp", "/schoollpic.webp", "/schoollpic.webp"],
       features: [
         "Responsive design across all devices",
         "Interactive animations and transitions",
@@ -179,14 +179,14 @@ export const portfolioConfig: PortfolioConfig = {
       subtitle: "Full-Stack Developer",
       description:
         "Developed complete e-commerce solution using React.js frontend and RESTful API architecture. Implemented product catalogue, cart functionality, and responsive design patterns. Utilized JavaScript OOPs principles for modular and maintainable code structure.",
-      image: "/ecommerce-pic.png",
+      image: "/ecommerce-pic.webp",
       link: "https://gorgeous-shortbread-467224.netlify.app/",
       date: "2024",
       category: "E-Commerce",
       tags: ["React.js", "RESTful API", "OOP", "Responsive Design"],
       status: "Completed",
       slug: "ecommerce-platform",
-      gallery: ["/ecommerce-pic.png", "/ecommerce-pic.png", "/ecommerce-pic.png"],
+      gallery: ["/ecommerce-pic.webp", "/ecommerce-pic.webp", "/ecommerce-pic.webp"],
       features: [
         "Product catalog with search and filters",
         "Shopping cart with real-time updates",
@@ -206,14 +206,14 @@ export const portfolioConfig: PortfolioConfig = {
       subtitle: "DSA Implementation Project",
       description:
         "Built interactive visualization tool for sorting algorithms using JavaScript. Implemented Quick Sort, Merge Sort, and Heap Sort with O(n log n) complexity. Created comparative analysis demonstrating 40% performance improvement over bubble sort.",
-      image: "/algo-pic.png",
+      image: "/algo-pic.webp",
       link: "https://clinquant-bienenstitch-5e4ca2.netlify.app/",
       date: "2024",
       category: "Data Structures & Algorithms",
       tags: ["JavaScript", "Algorithms", "Performance", "Visualization"],
       status: "Completed",
       slug: "algorithm-visualizer",
-      gallery: ["/algo-pic.png", "/algo-pic.png", "/algo-pic.png"],
+      gallery: ["/algo-pic.webp", "/algo-pic.webp", "/algo-pic.webp"],
       features: [
         "Real-time algorithm visualization",
         "Performance comparison charts",
@@ -232,14 +232,14 @@ export const portfolioConfig: PortfolioConfig = {
       subtitle: "Full-Stack Developer | Interview Preparation Platform",
       description:
         "Comprehensive technical interview preparation platform built with modern web technologies. Features coding challenges, algorithm practice, system design guides, and progress tracking to help developers ace their technical interviews.",
-      image: "/techprep-pic.png", // You'll need to add this image
+      image: "/techprep-pic.webp",
       link: "https://your-techprep-link.com", // Add your actual link here
       date: "2024",
       category: "EdTech Platform",
       tags: ["React.js", "Node.js", "MongoDB", "Algorithm Practice", "Interview Prep"],
       status: "Completed",
       slug: "techprep-app",
-      gallery: ["/techprep-pic.png", "/techprep-pic.png", "/techprep-pic.png"],
+      gallery: ["/techprep-pic.webp", "/techprep-pic.webp", "/techprep-pic.webp"],
       features: [
         "Interactive coding challenges",
         "Algorithm visualization and explanation",
