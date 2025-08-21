@@ -81,15 +81,15 @@ function MobileNav({ currentPage, onPageChange }: { currentPage: string; onPageC
           transition={{ delay: 0.2 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="relative p-3 bg-[#3B82F6]/10 rounded-xl hover:bg-[#3B82F6]/20 transition-colors border border-[#3B82F6]/20"
+          className="relative p-3 bg-white/20 rounded-xl hover:bg-white/30 transition-colors border border-white/30"
         >
           <motion.div
             animate={{ rotate: isMenuOpen ? 180 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            {isMenuOpen ? <X size={22} className="text-[#3B82F6]" /> : <Menu size={22} className="text-[#3B82F6]" />}
+            {isMenuOpen ? <X size={22} className="text-[#1d1d1f]" /> : <Menu size={22} className="text-[#1d1d1f]" />}
           </motion.div>
-          <div className="absolute -top-1 -right-1 w-2 h-2 bg-[#3B82F6] rounded-full"></div>
+          <div className="absolute -top-1 -right-1 w-2 h-2 bg-[#1d1d1f] rounded-full"></div>
         </motion.button>
       </div>
 
@@ -100,7 +100,7 @@ function MobileNav({ currentPage, onPageChange }: { currentPage: string; onPageC
           opacity: isMenuOpen ? 1 : 0 
         }}
         transition={{ duration: 0.3 }}
-        className="overflow-hidden border-t border-[#aecfdc]/20 bg-[#e3f2f9]/95"
+        className="overflow-hidden border-t border-white/20 bg-white/20 backdrop-blur-[10px]"
       >
         <nav className="flex flex-col p-4 space-y-1">
           {Object.entries(pages).map(([key, page], index) => (
@@ -112,8 +112,8 @@ function MobileNav({ currentPage, onPageChange }: { currentPage: string; onPageC
               onClick={() => handleNavigation(key)}
               className={`text-left p-3 rounded-lg transition-colors ${
                 currentPage === key 
-                  ? 'bg-[#3B82F6]/10 text-[#3B82F6] font-medium' 
-                  : 'hover:bg-[#aecfdc]/20 text-[#1d1d1f]'
+                  ? 'bg-white/30 text-[#1d1d1f] font-medium' 
+                  : 'hover:bg-white/20 text-[#1d1d1f]'
               }`}
             >
               <span className="font-light text-[16px] uppercase">{page.label}</span>
@@ -257,7 +257,7 @@ export default function MobileApp() {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#f9fcff] relative">
+    <div ref={containerRef} className="min-h-screen relative">
       <FloatingElements />
       <MobileNav currentPage={currentPage} onPageChange={handlePageChange} />
       <main className="relative z-10">
