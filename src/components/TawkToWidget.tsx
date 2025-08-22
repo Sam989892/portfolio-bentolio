@@ -4,7 +4,12 @@ import { useEffect } from 'react'
 
 declare global {
   interface Window {
-    Tawk_API?: any
+    Tawk_API?: {
+      onLoad?: () => void
+      onStatusChange?: (status: string) => void
+      visitor?: Record<string, unknown>
+      [key: string]: unknown
+    }
     Tawk_LoadStart?: Date
   }
 }
