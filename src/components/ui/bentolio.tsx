@@ -45,6 +45,13 @@ interface BentolioProps {
       description: string;
     }>;
   };
+  skills?: {
+    technical: string[];
+    dsa: string[];
+    aiml: string[];
+    tools: string[];
+    languages: string[];
+  };
 }
 
 // Using XL layout as the final optimized layout
@@ -99,6 +106,7 @@ export default function Bentolio({
   contactLink = "#",
   navLinks,
   about,
+  skills,
 }: BentolioProps) {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState<string>('HOME');
@@ -108,7 +116,10 @@ export default function Bentolio({
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    projectType: '',
+    budget: '',
+    timeline: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -200,7 +211,7 @@ export default function Bentolio({
 
       if (response.ok) {
         setSubmitStatus('success');
-        setContactForm({ name: '', email: '', subject: '', message: '' });
+        setContactForm({ name: '', email: '', subject: '', message: '', projectType: '', budget: '', timeline: '' });
       } else {
         setSubmitStatus('error');
       }
@@ -212,7 +223,7 @@ export default function Bentolio({
   };
 
   // Handle form input changes
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setContactForm(prev => ({
       ...prev,
@@ -489,6 +500,7 @@ export default function Bentolio({
                         alt="flower"
                         width={80}
                         height={80}
+                        loading="lazy"
                         className="w-full h-full"
                         style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
                       />
@@ -511,6 +523,46 @@ export default function Bentolio({
                       </React.Fragment>
                     ))}
                   </p>
+                  
+                  {/* Skills capsules in the Building Digital Dreams card - only show on ABOUT page */}
+                  {currentPage === 'ABOUT' && skills && (
+                    <div className="mt-4 sm:mt-5 md:mt-6 w-full sm:w-[90%]">
+                      <div className="flex flex-wrap gap-2 sm:gap-3">
+                        {skills.technical?.slice(0, 6).map((skill, index) => (
+                          <span
+                            key={`technical-${index}`}
+                            className="px-2 sm:px-3 py-1 sm:py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-xs sm:text-sm font-medium border border-purple-200 hover:from-purple-200 hover:to-pink-200 transition-all duration-200"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        {skills.dsa?.slice(0, 4).map((dsa, index) => (
+                          <span
+                            key={`dsa-${index}`}
+                            className="px-2 sm:px-3 py-1 sm:py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-xs sm:text-sm font-medium border border-green-200 hover:from-green-200 hover:to-emerald-200 transition-all duration-200"
+                          >
+                            {dsa}
+                          </span>
+                        ))}
+                        {skills.aiml?.slice(0, 3).map((aiml, index) => (
+                          <span
+                            key={`aiml-${index}`}
+                            className="px-2 sm:px-3 py-1 sm:py-2 bg-gradient-to-r from-orange-100 to-amber-100 text-orange-700 rounded-full text-xs sm:text-sm font-medium border border-orange-200 hover:from-orange-200 hover:to-amber-200 transition-all duration-200"
+                          >
+                            {aiml}
+                          </span>
+                        ))}
+                        {skills.tools?.slice(0, 3).map((tool, index) => (
+                          <span
+                            key={`tools-${index}`}
+                            className="px-2 sm:px-3 py-1 sm:py-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 rounded-full text-xs sm:text-sm font-medium border border-blue-200 hover:from-blue-200 hover:to-indigo-200 transition-all duration-200"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -529,6 +581,8 @@ export default function Bentolio({
                   alt="profile"
                   width={330}
                   height={476}
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 330px"
                   className={`m-0 ${config.borderRadius} w-full h-full object-cover`}
                 />
               </motion.div>
@@ -558,6 +612,7 @@ export default function Bentolio({
                     alt="circle"
                     width={32}
                     height={32}
+                    loading="lazy"
                     className={config.iconSizes}
                     style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
                   />
@@ -644,9 +699,9 @@ export default function Bentolio({
                       </p>
                     </div>
                   ) : (
-                    // Regular Contact Link for other pages
-                    <Link
-                      href={contactLink}
+                    // Regular Contact Link for other pages - navigate to CONTACT page
+                    <div
+                      onClick={() => setCurrentPage('CONTACT')}
                       style={{ textDecoration: "none" }}
                       className="flex flex-col justify-between items-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 h-full hover:scale-[1.02] transition-transform cursor-pointer"
                     >
@@ -659,7 +714,7 @@ export default function Bentolio({
                       <p className={`m-0 font-medium ${config.contactText}`}>
                         {pageContent.contactText}
                       </p>
-                    </Link>
+                    </div>
                   )}
                 </motion.div>
               </AnimatePresence>
@@ -708,12 +763,12 @@ export default function Bentolio({
                         <Send size={32} className={config.iconSizes} />
                       </div>
                       
-                      <div className="flex-1 flex flex-col gap-5">
+                      <div className="flex-1 flex flex-col gap-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <input
                             type="text"
                             name="name"
-                            placeholder="Your Name"
+                            placeholder="Your Name *"
                             value={contactForm.name}
                             onChange={handleFormChange}
                             required
@@ -723,7 +778,7 @@ export default function Bentolio({
                           <input
                             type="email"
                             name="email"
-                            placeholder="Your Email"
+                            placeholder="Your Email *"
                             value={contactForm.email}
                             onChange={handleFormChange}
                             required
@@ -731,10 +786,55 @@ export default function Bentolio({
                           />
                         </div>
                         
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <select
+                            name="projectType"
+                            value={contactForm.projectType}
+                            onChange={handleFormChange}
+                            className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-base focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                          >
+                            <option value="" className="bg-gray-800 text-white">Project Type</option>
+                            <option value="website" className="bg-gray-800 text-white">Website Development</option>
+                            <option value="webapp" className="bg-gray-800 text-white">Web Application</option>
+                            <option value="mobile" className="bg-gray-800 text-white">Mobile App</option>
+                            <option value="ecommerce" className="bg-gray-800 text-white">E-commerce</option>
+                            <option value="consulting" className="bg-gray-800 text-white">Consulting</option>
+                            <option value="other" className="bg-gray-800 text-white">Other</option>
+                          </select>
+                          
+                          <select
+                            name="budget"
+                            value={contactForm.budget}
+                            onChange={handleFormChange}
+                            className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-base focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                          >
+                            <option value="" className="bg-gray-800 text-white">Budget Range</option>
+                            <option value="under-5k" className="bg-gray-800 text-white">Under $5,000</option>
+                            <option value="5k-15k" className="bg-gray-800 text-white">$5,000 - $15,000</option>
+                            <option value="15k-30k" className="bg-gray-800 text-white">$15,000 - $30,000</option>
+                            <option value="30k-plus" className="bg-gray-800 text-white">$30,000+</option>
+                            <option value="discuss" className="bg-gray-800 text-white">Let's Discuss</option>
+                          </select>
+                        </div>
+                        
+                        <select
+                          name="timeline"
+                          value={contactForm.timeline}
+                          onChange={handleFormChange}
+                          className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-base focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                        >
+                          <option value="" className="bg-gray-800 text-white">Project Timeline</option>
+                          <option value="asap" className="bg-gray-800 text-white">ASAP</option>
+                          <option value="1-month" className="bg-gray-800 text-white">Within 1 Month</option>
+                          <option value="3-months" className="bg-gray-800 text-white">1-3 Months</option>
+                          <option value="6-months" className="bg-gray-800 text-white">3-6 Months</option>
+                          <option value="flexible" className="bg-gray-800 text-white">Flexible</option>
+                        </select>
+                        
                         <input
                           type="text"
                           name="subject"
-                          placeholder="Subject"
+                          placeholder="Project Subject *"
                           value={contactForm.subject}
                           onChange={handleFormChange}
                           required
@@ -743,12 +843,12 @@ export default function Bentolio({
                         
                         <textarea
                           name="message"
-                          placeholder="Your Message"
+                          placeholder="Project Details & Requirements *"
                           value={contactForm.message}
                           onChange={handleFormChange}
                           required
-                          rows={6}
-                          className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-base placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none flex-1 transition-all"
+                          rows={4}
+                          className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl text-base placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none transition-all"
                         />
                       </div>
                       
@@ -802,6 +902,7 @@ export default function Bentolio({
                         <div key={`${currentPage}-project-${index}`}>
                           {index === 0 ? (
                             <React.Fragment>
+                              {/* Make entire project card clickable - goes to project page first */}
                               <div
                                 onClick={() => {
                                   if ('id' in project && project.id) {
@@ -814,64 +915,102 @@ export default function Bentolio({
                                   color: "#1d1d1f",
                                   cursor: "pointer"
                                 }}
-                                className="flex justify-between items-center w-full hover:opacity-80 transition-opacity"
+                                className="w-full hover:opacity-90 active:opacity-75 active:scale-[0.98] transition-all duration-150"
                               >
-                                <p className={`m-0 font-medium ${config.projectText}`}>
-                                  {project.name}
-                                </p>
-                                <Image
-                                  src="https://atomix-ui.vercel.app/bentolio/svg/arrow.svg"
-                                  alt="arrow"
-                                  width={24}
-                                  height={24}
-                                  className={config.iconSizes}
-                                  style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
-                                />
-                              </div>
-                              {/* Consistent visual container for all sections - EXACT same dimensions */}
-                              <div className={`mt-2 sm:mt-3 md:mt-4 lg:mt-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden`}>
+                                {/* Project title and arrow */}
+                                <div className="flex justify-between items-center w-full mb-2 sm:mb-3 md:mb-4 lg:mb-5">
+                                  <p className={`m-0 font-medium ${config.projectText}`}>
+                                    {project.name}
+                                  </p>
+                                  <Image
+                                    src="https://atomix-ui.vercel.app/bentolio/svg/arrow.svg"
+                                    alt="arrow"
+                                    width={24}
+                                    height={24}
+                                    loading="lazy"
+                                    className={config.iconSizes}
+                                    style={{ filter: 'hue-rotate(280deg) saturate(1.2)' }}
+                                  />
+                                </div>
+                                
+                                {/* Browser-style project preview container - now clickable */}
+                                <div className={`${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden hover:scale-[1.02] transition-transform`}>
                                 {(currentPage === 'HOME' || currentPage === 'PROJECTS') && (
-                                  <AnimatePresence mode="wait">
-                                    <motion.div
-                                      key={hoveredProjectIndex !== null ? `hovered-${hoveredProjectIndex}` : 'default'}
-                                      initial={{ opacity: 0 }}
-                                      animate={{ opacity: 1 }}
-                                      exit={{ opacity: 0 }}
-                                      transition={{ duration: 0.3 }}
-                                      className="w-full h-full"
-                                    >
-                                      {(() => {
-                                        // Show hovered project image if hovering over non-first project
-                                        if (hoveredProjectIndex !== null && hoveredProjectIndex > 0) {
-                                          const hoveredProject = pageContent.projects?.[hoveredProjectIndex];
-                                          if (hoveredProject && 'image' in hoveredProject && hoveredProject.image) {
-                                            return (
-                                              <Image
-                                                src={hoveredProject.image}
-                                                alt={hoveredProject.name}
-                                                width={330}
-                                                height={330}
-                                                className={`w-full h-full object-cover ${config.borderRadius}`}
-                                              />
-                                            );
-                                          }
-                                        }
-                                        // Default: show first project image
-                                        if ('image' in project && project.image) {
-                                          return (
-                                            <Image
-                                              src={project.image}
-                                              alt={project.name}
-                                              width={330}
-                                              height={330}
-                                              className={`w-full h-full object-cover ${config.borderRadius}`}
-                                            />
-                                          );
-                                        }
-                                        return null;
-                                      })()}
-                                    </motion.div>
-                                  </AnimatePresence>
+                                  <div className="w-full h-full">
+                                    {/* Browser Frame */}
+                                    <div className="bg-gray-200 p-1 sm:p-2 border-b border-gray-300">
+                                      <div className="flex items-center gap-1 sm:gap-2">
+                                        {/* Browser controls */}
+                                        <div className="flex gap-1">
+                                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-500 rounded-full"></div>
+                                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow-500 rounded-full"></div>
+                                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full"></div>
+                                        </div>
+                                        {/* Address bar */}
+                                        <div className="flex-1 mx-1 sm:mx-2">
+                                          <div className="bg-white rounded-sm px-1 sm:px-2 py-0.5 text-xs text-gray-600 border">
+                                            <span className="text-green-600">🔒</span>
+                                            <span className="hidden sm:inline"> {(() => {
+                                              if (hoveredProjectIndex !== null && hoveredProjectIndex > 0) {
+                                                const hoveredProject = pageContent.projects?.[hoveredProjectIndex];
+                                                return hoveredProject?.name || 'project';
+                                              }
+                                              return 'image' in project ? project.name : 'project';
+                                            })()} </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    
+                                    {/* Project preview area */}
+                                    <div className="flex-1 bg-gray-100 relative" style={{ height: 'calc(100% - 24px)' }}>
+                                      <AnimatePresence mode="wait">
+                                        <motion.div
+                                          key={hoveredProjectIndex !== null ? `hovered-${hoveredProjectIndex}` : 'default'}
+                                          initial={{ opacity: 0 }}
+                                          animate={{ opacity: 1 }}
+                                          exit={{ opacity: 0 }}
+                                          transition={{ duration: 0.3 }}
+                                          className="w-full h-full"
+                                        >
+                                          {(() => {
+                                            // Show hovered project image if hovering over non-first project
+                                            if (hoveredProjectIndex !== null && hoveredProjectIndex > 0) {
+                                              const hoveredProject = pageContent.projects?.[hoveredProjectIndex];
+                                              if (hoveredProject && 'image' in hoveredProject && hoveredProject.image) {
+                                                return (
+                                                  <Image
+                                                    src={hoveredProject.image}
+                                                    alt={hoveredProject.name}
+                                                    width={330}
+                                                    height={330}
+                                                    loading="lazy"
+                                                    sizes="(max-width: 768px) 100vw, 330px"
+                                                    className="w-full h-full object-cover"
+                                                  />
+                                                );
+                                              }
+                                            }
+                                            // Default: show first project image
+                                            if ('image' in project && project.image) {
+                                              return (
+                                                <Image
+                                                  src={project.image}
+                                                  alt={project.name}
+                                                  width={330}
+                                                  height={330}
+                                                  loading="lazy"
+                                                  sizes="(max-width: 768px) 100vw, 330px"
+                                                  className="w-full h-full object-cover"
+                                                />
+                                              );
+                                            }
+                                            return null;
+                                          })()}
+                                        </motion.div>
+                                      </AnimatePresence>
+                                    </div>
+                                  </div>
                                 )}
                                 {currentPage === 'ABOUT' && (
                                   <div className={`w-full h-full relative ${config.borderRadius} overflow-hidden group`}>
@@ -880,6 +1019,8 @@ export default function Bentolio({
                                       alt="Competition Winner - Best School Website Design"
                                       width={400}
                                       height={300}
+                                      loading="lazy"
+                                      sizes="(max-width: 768px) 100vw, 400px"
                                       className={`w-full h-full object-cover ${config.borderRadius} transition-transform duration-300 group-hover:scale-105`}
                                     />
                                     <div className={`absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent ${config.borderRadius} flex items-end p-4`}>
@@ -891,6 +1032,7 @@ export default function Bentolio({
                                     </div>
                                   </div>
                                 )}
+                                </div>
                               </div>
                             </React.Fragment>
                           ) : (

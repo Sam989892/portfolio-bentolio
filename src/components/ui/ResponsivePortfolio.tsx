@@ -73,6 +73,7 @@ export default function ResponsivePortfolio() {
             contactLink={`mailto:${portfolioConfig.contact.email}`}
             navLinks={portfolioConfig.navigation}
             about={portfolioConfig.about}
+            skills={portfolioConfig.skills}
           />
         </div>
       )}

@@ -26,7 +26,9 @@
       "Bash(grep:*)",
       "Bash(npm i:*)",
       "WebSearch",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(npm run lint:*)",
+      "Bash(git log:*)"
     ],
     "deny": []
   }

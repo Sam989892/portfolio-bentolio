@@ -35,20 +35,21 @@ const flipAnimation = {
 
 export default function ProjectsPageClient({ projects }: ProjectsPageClientProps) {
   const router = useRouter();
-  const [selectedProject] = useState<typeof projects[0] | null>(null);
   const [isInitialLoad] = useState(true);
   
-  const bg = "#e3f2f9";
-  const secondary = "#aecfdc";
-  
-  const currentProject = selectedProject || projects[0];
+  const currentProject = projects[0];
 
   return (
     <div className={`${config.containerClass} min-h-screen`} style={{ color: "#1d1d1f" }}>
       {/* Header */}
       <header className={config.headerClass}>
         <motion.div
-          style={{ backgroundColor: bg }}
+          style={{ 
+            background: "rgba(255, 255, 255, 0.25)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255, 255, 255, 0.3)",
+            boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)"
+          }}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={flipAnimation}
@@ -84,7 +85,10 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                 exit={isInitialLoad ? {} : { rotateY: 90 }}
                 transition={isInitialLoad ? { ...flipAnimation, delay: 0.1 } : flipAnimation}
                 style={{ 
-                  backgroundColor: bg,
+                  background: "rgba(255, 255, 255, 0.25)",
+                  backdropFilter: "blur(10px)",
+                  border: "1px solid rgba(255, 255, 255, 0.3)",
+                  boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
                   transformStyle: "preserve-3d",
                   backfaceVisibility: "hidden",
                 }}
@@ -209,7 +213,12 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
               initial={isInitialLoad ? { opacity: 0, scale: 0.8 } : false}
               animate={{ opacity: 1, scale: 1 }}
               transition={isInitialLoad ? { ...flipAnimation, delay: 0.4 } : {}}
-              style={{ backgroundColor: bg }}
+              style={{ 
+                background: "rgba(255, 255, 255, 0.25)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)"
+              }}
               className={`flex flex-col justify-between items-start gap-3 sm:gap-4 md:gap-6 lg:gap-8 ${config.componentPadding} ${config.borderRadius} h-full`}
             >
               <Image
@@ -251,7 +260,16 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
               initial={isInitialLoad ? { scale: 0.8, opacity: 0 } : false}
               animate={{ scale: 1, opacity: 1 }}
               transition={isInitialLoad ? { ...flipAnimation, delay: 0.5 } : {}}
-              style={{ backgroundColor: secondary, color: "#1d1d1f" }}
+              style={{ 
+                backgroundImage: "url('/celestials-dark-bg.webp')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backdropFilter: "blur(8px)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
+                color: "white"
+              }}
               className={`flex flex-col justify-between ${config.componentPadding} ${config.borderRadius} h-full`}
             >
               <div className="flex justify-between items-center w-full">
@@ -275,7 +293,12 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
               initial={isInitialLoad ? { scale: 0.8, opacity: 0 } : false}
               animate={{ scale: 1, opacity: 1 }}
               transition={isInitialLoad ? { ...flipAnimation, delay: 0.6 } : {}}
-              style={{ backgroundColor: bg }}
+              style={{ 
+                background: "rgba(255, 255, 255, 0.25)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)"
+              }}
               className={`${config.componentPadding} ${config.borderRadius} h-full`}
             >
               {/* Featured project in the main area, so show other projects here */}
@@ -308,16 +331,40 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                     />
                   </div>
                   
-                  {/* Visual container for first project */}
+                  {/* Browser-style project preview container */}
                   <div className={`mb-6 ${config.borderRadius} w-full h-[120px] sm:h-[160px] md:h-[200px] lg:h-[240px] xl:h-[280px] overflow-hidden`}>
                     {project.image && (
-                      <Image
-                        src={project.image}
-                        alt={project.name}
-                        width={330}
-                        height={330}
-                        className={`w-full h-full object-cover ${config.borderRadius}`}
-                      />
+                      <div className="w-full h-full">
+                        {/* Browser Frame */}
+                        <div className="bg-gray-200 p-1 sm:p-2 border-b border-gray-300">
+                          <div className="flex items-center gap-1 sm:gap-2">
+                            {/* Browser controls */}
+                            <div className="flex gap-1">
+                              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-500 rounded-full"></div>
+                              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow-500 rounded-full"></div>
+                              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full"></div>
+                            </div>
+                            {/* Address bar */}
+                            <div className="flex-1 mx-1 sm:mx-2">
+                              <div className="bg-white rounded-sm px-1 sm:px-2 py-0.5 text-xs text-gray-600 border">
+                                <span className="text-green-600">🔒</span>
+                                <span className="hidden sm:inline"> {project.name}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Project preview area */}
+                        <div className="flex-1 bg-gray-100 relative" style={{ height: 'calc(100% - 24px)' }}>
+                          <Image
+                            src={project.image}
+                            alt={project.name}
+                            width={330}
+                            height={330}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -335,7 +382,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                     }
                   }}
                   className="py-3 sm:py-4 md:py-6 lg:py-8 border-t-[2px] cursor-pointer hover:bg-white/20 transition-colors"
-                  style={{ borderTopColor: "#aecfdc" }}
+                  style={{ borderTopColor: "#a855f7" }}
                 >
                   <p className={`m-0 font-medium ${config.projectText}`}>
                     {project.name}
@@ -352,7 +399,12 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
               animate={{ scale: 1, opacity: 1 }}
               transition={isInitialLoad ? { ...flipAnimation, delay: 0.8 } : {}}
               className={`flex justify-between items-center ${config.componentPadding} ${config.borderRadius} font-light text-base sm:text-lg`}
-              style={{ backgroundColor: bg }}
+              style={{ 
+                background: "rgba(255, 255, 255, 0.25)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)"
+              }}
             >
               <Link
                 href="/"

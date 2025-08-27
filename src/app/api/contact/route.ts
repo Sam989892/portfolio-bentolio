@@ -22,6 +22,9 @@ interface ContactFormData {
   email: string;
   subject: string;
   message: string;
+  projectType?: string;
+  budget?: string;
+  timeline?: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -32,7 +35,7 @@ export async function POST(request: NextRequest) {
     const body: ContactFormData = await request.json();
     console.log('📝 Form data received:', { ...body, message: body.message.substring(0, 50) + '...' });
     
-    const { name, email, subject, message } = body;
+    const { name, email, subject, message, projectType, budget, timeline } = body;
 
     // Validate required fields
     if (!name || !email || !subject || !message) {
@@ -82,6 +85,9 @@ export async function POST(request: NextRequest) {
         email: email.trim().toLowerCase(),
         subject: subject.trim(),
         message: message.trim(),
+        projectType: projectType?.trim() || null,
+        budget: budget?.trim() || null,
+        timeline: timeline?.trim() || null,
         submittedAt: new Date(),
         ipAddress: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
         userAgent: request.headers.get('user-agent') || 'unknown',
