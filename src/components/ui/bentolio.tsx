@@ -103,7 +103,6 @@ export default function Bentolio({
   projects,
   profileImage = "/portrait.webp",
   socialLinks,
-  contactLink = "#",
   navLinks,
   about,
   skills,
@@ -266,9 +265,9 @@ export default function Bentolio({
         };
       case 'CONTACT':
         return {
-          title: "Let's Create Something Amazing Together",
+          title: "Let&apos;s Create Something Amazing Together",
           curvedText: "Amazing",
-          description: "Ready to bring your ideas to life? I'm available for freelance projects, collaborations, and full-time opportunities. Let's discuss how we can work together to create exceptional digital experiences.",
+          description: "Ready to bring your ideas to life? I&apos;m available for freelance projects, collaborations, and full-time opportunities. Let&apos;s discuss how we can work together to create exceptional digital experiences.",
           projects: socialLinks?.slice(0, 4).map(social => ({
             name: social.name,
             link: social.url
@@ -813,7 +812,7 @@ export default function Bentolio({
                             <option value="5k-15k" className="bg-gray-800 text-white">$5,000 - $15,000</option>
                             <option value="15k-30k" className="bg-gray-800 text-white">$15,000 - $30,000</option>
                             <option value="30k-plus" className="bg-gray-800 text-white">$30,000+</option>
-                            <option value="discuss" className="bg-gray-800 text-white">Let's Discuss</option>
+                            <option value="discuss" className="bg-gray-800 text-white">Let&apos;s Discuss</option>
                           </select>
                         </div>
                         
